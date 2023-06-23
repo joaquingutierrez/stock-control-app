@@ -1,3 +1,8 @@
 export { default as CartScreen } from "./CartScreen"
 export { default as CreateScreen } from "./CreateScreen"
 export { default as InventoryScreen } from "./InventoryScreen"
+export { default as CategoriesScreen } from "./CategoriesScreen"
+export { default as ProductsScreen } from "./ProductsScreen"
+export { default as ProductDetailScreen } from "./ProductDetailScreen"
+export { default as CreateCategoryScreen } from "./CreateCategoryScreen"
+export { default as CreateProductScreen } from "./CreateProductScreen"
