@@ -7,13 +7,18 @@ const Stack = createStackNavigator();
 const InventoryNavigation = () => {
     return (
         <Stack.Navigator
-        initialRouteName="Categories"
-        screenOptions={{
-            headerShown: false
-        }}
+            initialRouteName="Categories"
         >
-            <Stack.Screen name="Categories" component={CategoriesScreen} />
-            <Stack.Screen name="Products" component={ProductsScreen} />
+            <Stack.Screen name="Categories" component={CategoriesScreen}
+                options={{
+                    title: "Categorias"
+                }}
+            />
+            <Stack.Screen name="Products" component={ProductsScreen}
+                options={({ route }) => ({
+                    title: route.params.name
+                })}
+            />
             <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
         </Stack.Navigator>
     );
