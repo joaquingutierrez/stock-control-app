@@ -2,18 +2,20 @@ import { View, FlatList } from "react-native";
 
 import { styles } from "./style"
 import { ItemTouchable } from "../../components"
-import { products } from "../../constants/data/products"
+import { categories } from "../../constants/data/categories"
 
-const CartScreen = ({navigation}) => {
+const CategoriesCartScreen = ({ navigation }) => {
 
-    const onSelected = () => {
-
+    const onSelected = (item) => {
+        navigation.navigate("ProductsCart", {
+            name: item.title,
+        });
     }
 
     return (
         <View style={styles.container}>
             <FlatList style={styles.containerList}
-                data={products}
+                data={categories}
                 renderItem={({ item }) => <ItemTouchable item={item} textWhite={false} onSelected={() => onSelected(item)} />}
                 keyExtractor={item => item.id}
             />
@@ -21,4 +23,4 @@ const CartScreen = ({navigation}) => {
     )
 }
 
-export default CartScreen
+export default CategoriesCartScreen

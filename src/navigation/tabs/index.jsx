@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { CartScreen } from "../../screens"
-import { CreateNavigation, InventoryNavigation } from '../index';
+import { CreateNavigation, InventoryNavigation, CartNavigation } from '../index';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +15,7 @@ const MyTabs = () => {
         >
             <Tab.Screen name="Create" component={CreateNavigation} />
             <Tab.Screen name="Inventory" component={InventoryNavigation} />
-            <Tab.Screen name="Cart" component={CartScreen} />
+            <Tab.Screen name="Cart" component={CartNavigation} />
         </Tab.Navigator>
     );
 }
