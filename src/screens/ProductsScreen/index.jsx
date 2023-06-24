@@ -19,7 +19,7 @@ const ProductsScreen = ({ navigation, route }) => {
         <View style={styles.container}>
             <FlatList style={styles.containerList}
                 data={productsFiltered}
-                renderItem={({ item }) => <ItemTouchable item={item} textWhite={false} onSelected={() => onSelected(item.title)} />}
+                renderItem={({ item }) => <ItemTouchable item={item} textWhite={false} onSelected={() => onSelected(item)} />}
                 keyExtractor={item => item.id}
             />
         </View>

@@ -4,13 +4,13 @@ import { styles } from "./style"
 import { ItemDetail } from "../../components";
 import { products } from "../../constants/data/products";
 
-const ProductDetailScreen = () => {
+const ProductDetailScreen = ({ route }) => {
 
-    const product0 = products[0]
+    const product = products.find(product => product.title === route.params.name)
 
     return (
         <View style={styles.container}>
-            <ItemDetail item={product0} />
+            <ItemDetail item={product} />
         </View>
     )
 }
