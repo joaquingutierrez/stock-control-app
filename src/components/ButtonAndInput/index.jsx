@@ -1,11 +1,22 @@
-import { Button } from "react-native";
+import { Button, View } from "react-native";
 
-const ButtonAndInput = ({title}) => {
+import { styles } from "./style"
+import InputNumber from "../InputNumber"
+
+const ButtonAndInput = ({ title, number, handleNumberSubstract, handleNumberAdd, handleOnpress }) => {
 
     return (
-        <Button
-            title={title}
-        />
+        <View style={styles.container}>
+            <InputNumber
+                number={number}
+                handleNumberSubstract={handleNumberSubstract}
+                handleNumberAdd={handleNumberAdd}
+            />
+            <Button
+                title={title}
+                onPress={handleOnpress}
+            />
+        </View>
     )
 }
 

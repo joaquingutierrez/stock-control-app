@@ -8,9 +8,13 @@ const ProductDetailScreen = ({ route }) => {
 
     const product = products.find(product => product.title === route.params.name)
 
+    const handleAddToCart = () => {
+        console.log("Agregar al carrito")
+    }
+
     return (
         <View style={styles.container}>
-            <ItemDetail item={product} />
+            <ItemDetail item={product} handleAddToCart={handleAddToCart} />
         </View>
     )
 }

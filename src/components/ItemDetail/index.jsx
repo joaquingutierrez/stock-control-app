@@ -1,10 +1,23 @@
-import { View, Image } from "react-native"
+import { View, Image, Button } from "react-native"
+import { useState } from "react"
 
 import { styles } from "./style"
 import CustomText from "../CustomText"
 import ButtonAndInput from "../ButtonAndInput"
 
-const ItemDetail = ({ item }) => {
+const ItemDetail = ({ item, handleAddToCart }) => {
+
+    const [number, setNumber] = useState(-1)
+
+    const handleNumberAdd = () => {
+        setNumber(number + 1)
+    }
+    const handleNumberSubstract = () => {
+        setNumber(number - 1)
+    }
+    const handleOnpress = () => {
+        console.log("Actualizar", number)
+    }
 
     return (
         <View style={styles.container}>
@@ -22,9 +35,14 @@ const ItemDetail = ({ item }) => {
                 <CustomText myCustomText="Stock: " />
                 <CustomText myCustomText={item.stock} />
                 <ButtonAndInput
+                    number={number}
                     title="Actualizar"
+                    handleNumberAdd={handleNumberAdd}
+                    handleNumberSubstract={handleNumberSubstract}
+                    handleOnpress={handleOnpress}
                 />
             </View>
+            <Button title="Agregar al carrito" onPress={handleAddToCart}/>
         </View>
     )
 }
