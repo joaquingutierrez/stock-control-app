@@ -6,7 +6,7 @@ export const products = [
         category: "Category 0",
         minimum: 4,
         stock: 8,
-        image: null
+        image: "https://i.blogs.es/a19bfc/testing/1366_2000.jpg"
     },
     {
         id: 1,
