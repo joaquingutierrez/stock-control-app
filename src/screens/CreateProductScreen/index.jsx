@@ -29,7 +29,7 @@ const CreateProductScreen = () => {
                 placeHolder={text}
                 onHandleInput={onChangeText}
             />
-            <OptionSelection options={categories} handleCategory={handleCategory}/>
+            <OptionSelection options={categories} handleOptionSelect={handleCategory}/>
         </View>
     )
 }

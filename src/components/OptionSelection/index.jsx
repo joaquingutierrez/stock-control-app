@@ -4,13 +4,13 @@ import { useState } from "react";
 import { styles } from "./style"
 import CustomText from "../CustomText";
 
-const OptionSelection = ({ options, handleCategory }) => {
+const OptionSelection = ({ options, handleOptionSelect }) => {
 
     const [modalVisible, setModalVisible] = useState(false)
     const [category, setCategory] = useState("Seleccionar...")
 
     const handleSelection = (item) => {
-        handleCategory(item.id)
+        handleOptionSelect(item.id)
         setModalVisible(false)
         setCategory(item.title)
     }
