@@ -14,7 +14,7 @@ const CartScreen = ({navigation}) => {
         <View style={styles.container}>
             <FlatList style={styles.containerList}
                 data={products}
-                renderItem={({ item }) => <ItemTouchable item={item} textWhite={false} onSelected={() => onSelected(item)} />}
+                renderItem={({ item }) => <ItemTouchable title={item.title} textWhite={false} onSelected={() => onSelected(item)} />}
                 keyExtractor={item => item.id}
             />
         </View>
