@@ -1,5 +1,5 @@
-import { View, Text, TextInput } from "react-native";
-import { useState } from "react";
+import { View, Button } from "react-native";
+import { useRef, useState } from "react";
 
 import { styles } from "./style"
 import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
@@ -8,16 +8,22 @@ import CustomText from "../../components/CustomText";
 
 const CreateProductScreen = () => {
 
-    const [text, setText] = useState("Ingrese el título...")
+    const refTitle = useRef("")
+    const refDescription = useRef("")
+    const refCategory = useRef("")
+    const refImage = useRef("")
     const [min, setMin] = useState(0)
     const [stock, setStock] = useState(0)
 
-    const onChangeText = (e) => {
-        setText(e)
+    const onHandleTitle = (e) => {
+        refTitle.current = e
+    }
+    const onHandleDescription = (e) => {
+        refDescription.current = e
     }
 
     const handleCategory = (id) => {
-        console.log(id)
+        refCategory.current = id
     }
 
     const handleMinSubstract = ()=> {
@@ -38,17 +44,29 @@ const CreateProductScreen = () => {
         setStock(update)
     }
 
+    const handleNewProduct = () => {
+        const product = {
+            title: refTitle.current,
+            description: refDescription.current,
+            category: refCategory.current,
+            minimum: min,
+            stock: stock,
+            image: refImage.current
+        }
+        console.log("Producto:", product)
+    }
+
     return (
         <View style={styles.container}>
             <LabelAndInput
                 title="Título"
-                placeHolder={text}
-                onHandleInput={onChangeText}
+                placeHolder="Título..."
+                onHandleInput={onHandleTitle}
             />
             <LabelAndInput
                 title="Descripción"
-                placeHolder={text}
-                onHandleInput={onChangeText}
+                placeHolder="Descripcion..."
+                onHandleInput={onHandleDescription}
             />
             <OptionSelection options={categories} handleOptionSelect={handleCategory} />
             <View style={styles.labelAndComponent}>
@@ -71,6 +89,10 @@ const CreateProductScreen = () => {
                 <CustomText myCustomText="Imagen: " />
                 <CustomText myCustomText="Subir imagen" />
             </View>
+            <Button
+                title="Agregar Producto"
+                onPress={handleNewProduct}
+            />
         </View>
     )
 }

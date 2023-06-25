@@ -14,7 +14,7 @@ const LabelAndInput = ({ title, placeHolder, onHandleInput }) => {
             <TextInput
                 style={styles.input}
                 onChangeText={onHandleInput}
-                value={placeHolder}
+                placeholder={placeHolder}
             />
         </View>
     )
