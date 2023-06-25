@@ -7,14 +7,23 @@ const Stack = createStackNavigator();
 const CreateNavigation = () => {
     return (
         <Stack.Navigator
-        initialRouteName="CreateScreen"
-        screenOptions={{
-            headerShown: false
-        }}
+            initialRouteName="CreateScreen"
         >
-            <Stack.Screen name="CreateScreen" component={CreateScreen} />
-            <Stack.Screen name="CreateCategory" component={CreateCategoryScreen} />
-            <Stack.Screen name="CreateProduct" component={CreateProductScreen} />
+            <Stack.Screen name="CreateScreen" component={CreateScreen}
+                options={{
+                    title: "Crear"
+                }}
+            />
+            <Stack.Screen name="CreateCategory" component={CreateCategoryScreen}
+                options={{
+                    title: "Crear Categoría"
+                }}
+            />
+            <Stack.Screen name="CreateProduct" component={CreateProductScreen}
+                options={{
+                    title: "Crear Producto"
+                }}
+            />
         </Stack.Navigator>
     );
 }
