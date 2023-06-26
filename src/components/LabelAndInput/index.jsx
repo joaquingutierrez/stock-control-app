@@ -3,7 +3,7 @@ import { View, Text, TextInput } from "react-native"
 import { styles } from "./style"
 import CustomText from "../CustomText"
 
-const LabelAndInput = ({ title, placeHolder, onHandleInput }) => {
+const LabelAndInput = ({ title, placeHolder, onHandleInput, value }) => {
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
@@ -15,6 +15,7 @@ const LabelAndInput = ({ title, placeHolder, onHandleInput }) => {
                 style={styles.input}
                 onChangeText={onHandleInput}
                 placeholder={placeHolder}
+                value={value}
             />
         </View>
     )

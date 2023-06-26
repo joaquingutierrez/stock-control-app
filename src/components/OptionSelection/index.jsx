@@ -4,15 +4,15 @@ import { useState } from "react";
 import { styles } from "./style"
 import CustomText from "../CustomText";
 
-const OptionSelection = ({ options, handleOptionSelect }) => {
+const OptionSelection = ({ options, handleOptionSelect, value}) => {
 
     const [modalVisible, setModalVisible] = useState(false)
-    const [category, setCategory] = useState("Seleccionar...")
+    /* const [category, setCategory] = useState("Seleccionar...") */
 
     const handleSelection = (item) => {
         handleOptionSelect(item.title)
-        setModalVisible(false)
-        setCategory(item.title)
+        setModalVisible(false)/* 
+        setCategory(item.title) */
     }
 
     const renderItem = ({ item }) => {
@@ -55,7 +55,7 @@ const OptionSelection = ({ options, handleOptionSelect }) => {
             <Pressable
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>{category}</Text>
+                <Text style={styles.textStyle}>{value || "Seleccionar..."}</Text>
             </Pressable>
         </View>
     )

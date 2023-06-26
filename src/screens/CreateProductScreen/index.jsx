@@ -1,35 +1,35 @@
-import { View, Button } from "react-native";
+import { View, Button, Alert } from "react-native";
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./style"
 import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
-import { categories } from "../../constants/data/categories"
 import CustomText from "../../components/CustomText";
 import { addProduct } from "../../store/reducers/productSlice";
 
 const CreateProductScreen = () => {
 
-    const refTitle = useRef("")
-    const refDescription = useRef("")
-    const refCategory = useRef("")
-    const refImage = useRef("")
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
+    const [image, setImage] = useState("")
     const [min, setMin] = useState(0)
     const [stock, setStock] = useState(0)
     const dispatch = useDispatch()
+    const categories = useSelector(status => status.category.data)
 
     const onHandleTitle = (e) => {
-        refTitle.current = e
+        setTitle(e)
     }
     const onHandleDescription = (e) => {
-        refDescription.current = e
+        setDescription(e)
     }
 
-    const handleCategory = (id) => {
-        refCategory.current = id
+    const handleCategory = (title) => {
+        setCategory(title)
     }
 
-    const handleMinSubstract = ()=> {
+    const handleMinSubstract = () => {
         const update = min - 1
         setMin(update)
     }
@@ -38,7 +38,7 @@ const CreateProductScreen = () => {
         setMin(update)
     }
 
-    const handleStockSubstract = ()=> {
+    const handleStockSubstract = () => {
         const update = stock - 1
         setStock(update)
     }
@@ -49,14 +49,27 @@ const CreateProductScreen = () => {
 
     const handleNewProduct = () => {
         const product = {
-            title: refTitle.current,
-            description: refDescription.current,
-            category: refCategory.current,
+            title: title,
+            description: description,
+            category: category,
             minimum: min,
             stock: stock,
-            image: refImage.current
+            image: image
         }
         dispatch(addProduct(product))
+        setTitle("")
+        setDescription("")
+        setCategory("")
+        setImage("")
+        setMin(0)
+        setStock(0)
+        return (
+            Alert.alert("Producto agregado","",[
+                {
+                    text: "Aceptar"
+                }
+            ])
+        )
     }
 
     return (
@@ -65,13 +78,20 @@ const CreateProductScreen = () => {
                 title="Título"
                 placeHolder="Título..."
                 onHandleInput={onHandleTitle}
+                value={title}
             />
             <LabelAndInput
                 title="Descripción"
                 placeHolder="Descripcion..."
                 onHandleInput={onHandleDescription}
+                value={description}
             />
-            <OptionSelection options={categories} handleOptionSelect={handleCategory} />
+            <OptionSelection
+            options={categories}
+            handleOptionSelect={handleCategory}
+            initialValue={category}
+            value={category}
+            />
             <View style={styles.labelAndComponent}>
                 <CustomText myCustomText="Mínimo: " />
                 <InputNumber
@@ -81,7 +101,7 @@ const CreateProductScreen = () => {
                 />
             </View>
             <View style={styles.labelAndComponent}>
-            <CustomText myCustomText="Stock: " />
+                <CustomText myCustomText="Stock: " />
                 <InputNumber
                     number={stock}
                     handleNumberSubstract={handleStockSubstract}

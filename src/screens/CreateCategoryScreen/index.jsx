@@ -1,5 +1,5 @@
-import { View, Button } from "react-native";
-import { useRef } from "react";
+import { View, Button, Alert } from "react-native";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { styles } from "./style"
@@ -8,18 +8,22 @@ import { addCategory } from "../../store/reducers/categotySlice";
 
 const CreateCategoryScreen = () => {
 
-    const refCategoryTitle = useRef("")
+    const [categoryTitle, setCategoryTitle] = useState("")
     const dispatch = useDispatch()
 
     const onHandleInput = (e) => {
-        refCategoryTitle.current = e
+        setCategoryTitle(e)
     }
     const handleNewCategory = () => {
-        refCategoryTitle.current ? (
-            dispatch(addCategory(refCategoryTitle.current))
-        ) : (
-            console.log("No introdujo un nombre de categoría")
-        )
+        if (categoryTitle) {
+            dispatch(addCategory(categoryTitle))
+            setCategoryTitle("")
+            Alert.alert("Categoría agregada", "", [
+                {
+                    text: "Aceptar"
+                }
+            ])
+        } 
     }
 
     return (
@@ -28,7 +32,8 @@ const CreateCategoryScreen = () => {
                 title="Nombre de la categoría"
                 placeHolder="Categoría..."
                 onHandleInput={onHandleInput}
-            />
+                value={categoryTitle}
+                />
             <Button
                 title="Agregar Categoría"
                 onPress={()=>handleNewCategory()}
