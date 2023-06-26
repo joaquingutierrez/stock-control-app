@@ -1,10 +1,12 @@
 import { View, Button } from "react-native";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { styles } from "./style"
 import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
 import { categories } from "../../constants/data/categories"
 import CustomText from "../../components/CustomText";
+import { addProduct } from "../../store/reducers/productSlice";
 
 const CreateProductScreen = () => {
 
@@ -14,6 +16,7 @@ const CreateProductScreen = () => {
     const refImage = useRef("")
     const [min, setMin] = useState(0)
     const [stock, setStock] = useState(0)
+    const dispatch = useDispatch()
 
     const onHandleTitle = (e) => {
         refTitle.current = e
@@ -53,7 +56,7 @@ const CreateProductScreen = () => {
             stock: stock,
             image: refImage.current
         }
-        console.log("Producto:", product)
+        dispatch(addProduct(product))
     }
 
     return (

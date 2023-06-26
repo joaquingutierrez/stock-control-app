@@ -1,10 +1,12 @@
 import { View, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 
 import { styles } from "./style"
-import { products } from "../../constants/data/products"
-import {ItemTouchable} from "../../components"
+import { ItemTouchable } from "../../components"
 
 const ProductsScreen = ({ navigation, route }) => {
+
+    const products = useSelector(state => state.product.data)
 
     const categoryName = route.params.name
     const productsFiltered = products.filter((product => product.category === categoryName))

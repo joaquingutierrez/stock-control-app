@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { styles } from "./style"
 import { LabelAndInput } from "../../components";
-import { addCategory } from "../../store/reducers";
+import { addCategory } from "../../store/reducers/categotySlice";
 
 const CreateCategoryScreen = () => {
 

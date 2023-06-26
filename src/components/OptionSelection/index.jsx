@@ -10,7 +10,7 @@ const OptionSelection = ({ options, handleOptionSelect }) => {
     const [category, setCategory] = useState("Seleccionar...")
 
     const handleSelection = (item) => {
-        handleOptionSelect(item.id)
+        handleOptionSelect(item.title)
         setModalVisible(false)
         setCategory(item.title)
     }
