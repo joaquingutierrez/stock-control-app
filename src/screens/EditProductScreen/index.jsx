@@ -3,15 +3,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./style"
-import { editProduct } from "../../store/reducers/productSlice";
+import { editProduct, deleteProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
+import CustomText from "../../components/CustomText";
 
 const EditProductScreen = ({ navigation, route }) => {
 
     const categories = useSelector(status => status.category.data)
     const products = useSelector(status => status.product.data)
     const dispatch = useDispatch()
-    const product = products.find(product => product.id === route.params.id)
+    const product = products.find(product => product.id === route.params.id) || ""
 
     const [title, setTitle] = useState(product.title)
     const [description, setDescription] = useState(product.description)
@@ -69,34 +70,59 @@ const EditProductScreen = ({ navigation, route }) => {
         setStock(0)
         Alert.alert("Producto modificado", "", [
             {
-                text: "Aceptar"
+                text: "Aceptar",
+                onPress: () => navigation.navigate("Categories")
             }
         ])
-        navigation.navigate("Categories");
+
+    }
+    const handleDeleteProduct = () => {
+        Alert.alert("Borrar producto", "¿Está seguro?", [
+            {
+                text: "Sí",
+                onPress: () => {
+                    dispatch(deleteProduct(product))
+                    navigation.navigate("Categories");
+                }
+            },
+            {
+                text: "No",
+            }
+        ])
     }
 
     return (
         <View style={styles.container}>
-            <CreateProduct
-                onHandleTitle={onHandleTitle}
-                onHandleDescription={onHandleDescription}
-                handleCategory={handleCategory}
-                handleMinSubstract={handleMinSubstract}
-                handleMinAdd={handleMinAdd}
-                handleStockSubstract={handleStockSubstract}
-                handleStockAdd={handleStockAdd}
-                title={title}
-                description={description}
-                category={category}
-                min={min}
-                stock={stock}
-                categories={categories}
-                image={image}
-            />
-            <Button
-                title="Modificar Producto"
-                onPress={handleEditProduct}
-            />
+            {product ? (
+                <>
+                    <CreateProduct
+                        onHandleTitle={onHandleTitle}
+                        onHandleDescription={onHandleDescription}
+                        handleCategory={handleCategory}
+                        handleMinSubstract={handleMinSubstract}
+                        handleMinAdd={handleMinAdd}
+                        handleStockSubstract={handleStockSubstract}
+                        handleStockAdd={handleStockAdd}
+                        title={title}
+                        description={description}
+                        category={category}
+                        min={min}
+                        stock={stock}
+                        categories={categories}
+                        image={image}
+                    />
+                    <Button
+                        title="Modificar Producto"
+                        onPress={handleEditProduct}
+                    />
+                    <Button
+                        title="Borrar Producto"
+                        onPress={handleDeleteProduct}
+                    />
+                </>
+            ) : (
+                <CustomText myCustomText="Producto no econtrado" />
+            )}
         </View>
     )
 }

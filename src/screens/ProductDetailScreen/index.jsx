@@ -1,8 +1,9 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useSelector } from "react-redux";
 
 import { styles } from "./style"
 import { ItemDetail } from "../../components";
+import CustomText from "../../components/CustomText";
 
 const ProductDetailScreen = ({ route }) => {
 
@@ -16,7 +17,11 @@ const ProductDetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <ItemDetail item={product} handleAddToCart={handleAddToCart} />
+            {product ? (
+                <ItemDetail item={product} handleAddToCart={handleAddToCart} />
+            ) : (
+                <CustomText myCustomText="Producto no encotrado" />
+            )}
         </View>
     )
 }

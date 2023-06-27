@@ -42,7 +42,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
                     handleOnpress={handleOnpress}
                 />
             </View>
-            <Button title="Agregar al carrito" onPress={handleAddToCart}/>
+            <Button title="Agregar al carrito" onPress={handleAddToCart} />
         </View>
     )
 }
