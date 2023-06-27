@@ -30,9 +30,14 @@ export const productSlice = createSlice({
         deleteProduct: (state, action) => {
             const myProductIndex = state.data.findIndex(product => product.id === action.payload.id)
             state.data.splice(myProductIndex, 1)
+        },
+        updateStock: (state, action) => {
+            const {id, newStock} = action.payload
+            const product = state.data.find(product => product.id === id)
+            product.stock = newStock
         }
     }
 })
 
-export const { addProduct, editProduct, deleteProduct } = productSlice.actions
+export const { addProduct, editProduct, deleteProduct, updateStock } = productSlice.actions
 export default productSlice.reducer

@@ -22,6 +22,8 @@ const ProductsCartScreen = ({ navigation, route }) => {
                 title={`${item.title} (${item.quantity})`}
                 textWhite={false}
                 quantity={quantity}
+                minQuantity={item.quantity}
+
             />
         )
     }

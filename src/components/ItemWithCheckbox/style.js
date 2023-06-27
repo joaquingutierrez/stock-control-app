@@ -13,5 +13,8 @@ export const styles = StyleSheet.create({
     },
     shop: {
         backgroundColor: colors.tertiary,
+    },
+    reached: {
+        backgroundColor: "green",
     }
 })

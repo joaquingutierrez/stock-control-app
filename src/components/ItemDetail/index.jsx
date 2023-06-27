@@ -1,13 +1,17 @@
 import { View, Image, Button } from "react-native"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 
 import { styles } from "./style"
 import CustomText from "../CustomText"
 import ButtonAndInput from "../ButtonAndInput"
+import { updateStock } from "../../store/reducers/productSlice"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
-    const [number, setNumber] = useState(-1)
+    const dispatch = useDispatch()
+
+    const [number, setNumber] = useState(item.stock)
 
     const handleNumberAdd = () => {
         setNumber(number + 1)
@@ -17,6 +21,13 @@ const ItemDetail = ({ item, handleAddToCart }) => {
     }
     const handleOnpress = () => {
         console.log("Actualizar", number)
+        const productId = item.id
+        const newStock = number
+        const payload = {
+            id: productId,
+            newStock: newStock
+        }
+        dispatch(updateStock(payload))
     }
 
     return (

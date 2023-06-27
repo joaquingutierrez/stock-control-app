@@ -6,7 +6,7 @@ import { styles } from "./style"
 import CustomText from "../CustomText"
 import InputNumber from "../InputNumber"
 
-const ItemWithCheckbox = ({ title, quantity }) => {
+const ItemWithCheckbox = ({ title, minQuantity, quantity }) => {
 
     const [number, setNumber] = useState(0)
 
@@ -24,7 +24,7 @@ const ItemWithCheckbox = ({ title, quantity }) => {
     }
 
     return (
-        <View style={[styles.container, number > 0 && styles.shop]}>
+        <View style={[styles.container, number > 0 && number < minQuantity && styles.shop, number >= minQuantity && styles.reached]}>
             <CustomText myCustomText={title} textType="title" textWhite={true} />
             <InputNumber
                 number={number}
