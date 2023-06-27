@@ -6,7 +6,7 @@ import { styles } from "./style"
 import { editProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 
-const EditProductScreen = ({ route }) => {
+const EditProductScreen = ({ navigation, route }) => {
 
     const categories = useSelector(status => status.category.data)
     const products = useSelector(status => status.product.data)
@@ -67,13 +67,12 @@ const EditProductScreen = ({ route }) => {
         setImage("")
         setMin(0)
         setStock(0)
-        return (
-            Alert.alert("Producto modificado", "", [
-                {
-                    text: "Aceptar"
-                }
-            ])
-        )
+        Alert.alert("Producto modificado", "", [
+            {
+                text: "Aceptar"
+            }
+        ])
+        navigation.navigate("Categories");
     }
 
     return (
