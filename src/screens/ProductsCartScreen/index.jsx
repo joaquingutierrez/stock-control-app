@@ -1,14 +1,16 @@
 import { View, FlatList, Button } from "react-native";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import { styles } from "./style"
-import { products } from "../../constants/data/products"
 import { ItemWithCheckbox } from "../../components"
-import { useState } from "react";
 
 const ProductsCartScreen = ({ navigation, route }) => {
 
+    const productsCart = useSelector(state => state.cart.data)
+
     const categoryName = route.params.name
-    const productsFiltered = products.filter((product => product.category === categoryName))
+    const productsCartFiltered = productsCart.filter((product => product.category === categoryName))
 
     const quantity = (quantity) => {
         console.log("Cantidad", quantity)
@@ -17,7 +19,7 @@ const ProductsCartScreen = ({ navigation, route }) => {
     const renderItem = ({ item }) => {
         return (
             <ItemWithCheckbox
-                item={item}
+                title={`${item.title} (${item.quantity})`}
                 textWhite={false}
                 quantity={quantity}
             />
@@ -31,11 +33,11 @@ const ProductsCartScreen = ({ navigation, route }) => {
     return (
         <View style={styles.container}>
             <FlatList style={styles.containerList}
-                data={productsFiltered}
+                data={productsCartFiltered}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
             />
-            <Button 
+            <Button
                 title="Terminar compra"
                 onPress={handleOnPress}
             />

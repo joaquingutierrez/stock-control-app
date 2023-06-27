@@ -6,7 +6,7 @@ import { styles } from "./style"
 import CustomText from "../CustomText"
 import InputNumber from "../InputNumber"
 
-const ItemWithCheckbox = ({ item, quantity }) => {
+const ItemWithCheckbox = ({ title, quantity }) => {
 
     const [number, setNumber] = useState(0)
 
@@ -25,7 +25,7 @@ const ItemWithCheckbox = ({ item, quantity }) => {
 
     return (
         <View style={[styles.container, number > 0 && styles.shop]}>
-            <CustomText myCustomText={item.title} textType="title" textWhite={true} />
+            <CustomText myCustomText={title} textType="title" textWhite={true} />
             <InputNumber
                 number={number}
                 handleNumberSubstract={handleNumberSubstract}
