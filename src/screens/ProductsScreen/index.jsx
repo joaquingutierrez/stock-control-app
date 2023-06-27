@@ -14,6 +14,7 @@ const ProductsScreen = ({ navigation, route }) => {
     const onSelected = (item) => {
         navigation.navigate("ProductDetail", {
             name: item.title,
+            id: item.id
         });
     }
 

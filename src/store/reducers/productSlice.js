@@ -17,10 +17,18 @@ export const productSlice = createSlice({
                 id: Date.now().toString()
             }
             state.data.push(newProduct)
-            console.log(newProduct)
+        },
+        editProduct: (state, action) => {
+            const myProduct = state.data.find(product => product.id === action.payload.id)
+            myProduct.title = action.payload.title
+            myProduct.description = action.payload.description
+            myProduct.category = action.payload.category
+            myProduct.minimum = action.payload.minimum
+            myProduct.stock = action.payload.stock
+            myProduct.image = action.payload.image
         }
     }
 })
 
-export const { addProduct } = productSlice.actions
+export const { addProduct, editProduct } = productSlice.actions
 export default productSlice.reducer

@@ -1,23 +1,25 @@
-import { View, Button, Alert } from "react-native";
+import { View, Alert, Button } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./style"
-import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
-import CustomText from "../../components/CustomText";
-import { addProduct } from "../../store/reducers/productSlice";
+import { editProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 
-const CreateProductScreen = () => {
+const EditProductScreen = ({ route }) => {
 
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [category, setCategory] = useState("")
-    const [image, setImage] = useState("")
-    const [min, setMin] = useState(0)
-    const [stock, setStock] = useState(0)
-    const dispatch = useDispatch()
     const categories = useSelector(status => status.category.data)
+    const products = useSelector(status => status.product.data)
+    const dispatch = useDispatch()
+    const product = products.find(product => product.id === route.params.id)
+
+    const [title, setTitle] = useState(product.title)
+    const [description, setDescription] = useState(product.description)
+    const [category, setCategory] = useState(product.category)
+    const [image, setImage] = useState(product.image)
+    const [min, setMin] = useState(product.minimum)
+    const [stock, setStock] = useState(product.stock)
+
 
     const onHandleTitle = (e) => {
         setTitle(e)
@@ -48,16 +50,17 @@ const CreateProductScreen = () => {
         setStock(update)
     }
 
-    const handleNewProduct = () => {
+    const handleEditProduct = () => {
         const product = {
             title: title,
             description: description,
             category: category,
             minimum: min,
             stock: stock,
-            image: image
+            image: image,
+            id: route.params.id
         }
-        dispatch(addProduct(product))
+        dispatch(editProduct(product))
         setTitle("")
         setDescription("")
         setCategory("")
@@ -65,7 +68,7 @@ const CreateProductScreen = () => {
         setMin(0)
         setStock(0)
         return (
-            Alert.alert("Producto agregado", "", [
+            Alert.alert("Producto modificado", "", [
                 {
                     text: "Aceptar"
                 }
@@ -92,11 +95,11 @@ const CreateProductScreen = () => {
                 image={image}
             />
             <Button
-                title="Crear Producto"
-                onPress={handleNewProduct}
+                title="Modificar Producto"
+                onPress={handleEditProduct}
             />
         </View>
     )
 }
 
-export default CreateProductScreen
+export default EditProductScreen
