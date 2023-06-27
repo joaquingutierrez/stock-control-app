@@ -6,6 +6,7 @@ import { styles } from "./style"
 import CustomText from "../CustomText"
 import ButtonAndInput from "../ButtonAndInput"
 import { updateStock } from "../../store/reducers/productSlice"
+import { addToCart } from "../../store/reducers/cartSlice"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
@@ -28,6 +29,13 @@ const ItemDetail = ({ item, handleAddToCart }) => {
             newStock: newStock
         }
         dispatch(updateStock(payload))
+        if (newStock < item.minimum) {
+            const payload = {
+                item: item,
+                quantity: item.minimum - newStock
+            }
+            dispatch(addToCart(payload))
+        }
     }
 
     return (

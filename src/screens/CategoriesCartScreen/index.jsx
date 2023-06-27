@@ -7,7 +7,7 @@ import { ItemTouchable } from "../../components"
 const CategoriesCartScreen = ({ navigation }) => {
 
     const categories = useSelector((state) => state.category.data)
-    const products = useSelector((state) => state.product.data)
+    const products = useSelector((state) => state.cart.data)
 
     const onSelected = (item) => {
         navigation.navigate("ProductsCart", {

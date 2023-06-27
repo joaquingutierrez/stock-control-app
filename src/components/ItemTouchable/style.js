@@ -8,5 +8,8 @@ export const styles = StyleSheet.create({
         width: "100%",
         paddingVertical: 4,
         marginVertical: 10,
+    },
+    danger: {
+        backgroundColor: "red",
     }
 })
