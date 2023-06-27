@@ -6,7 +6,7 @@ import { styles } from "./style"
 import CustomText from "../CustomText"
 import InputNumber from "../InputNumber"
 
-const ItemWithCheckbox = ({ title, minQuantity, quantity }) => {
+const ItemWithCheckbox = ({ id, title, minQuantity, quantity }) => {
 
     const [number, setNumber] = useState(0)
 
@@ -15,7 +15,7 @@ const ItemWithCheckbox = ({ title, minQuantity, quantity }) => {
     const handleNumberAdd = () => {
         const updatedNumber = number + 1
         setNumber(updatedNumber)
-        quantity(updatedNumber)
+        quantity(id, updatedNumber)
     }
     const handleNumberSubstract = () => {
         const updatedNumber = number - 1

@@ -1,24 +1,33 @@
 import { View, FlatList, Button } from "react-native";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { styles } from "./style"
 import { ItemWithCheckbox } from "../../components"
+import { completePurchase } from "../../store/reducers/cartSlice";
+import { updateStockAfterPurchase } from "../../store/reducers/productSlice";
 
 const ProductsCartScreen = ({ navigation, route }) => {
 
     const productsCart = useSelector(state => state.cart.data)
+    const dispatch = useDispatch()
 
     const categoryName = route.params.name
     const productsCartFiltered = productsCart.filter((product => product.category === categoryName))
-
-    const quantity = (quantity) => {
-        console.log("Cantidad", quantity)
+    
+    const createCart = []
+    const quantity = (id, quantity) => {
+        console.log("Cantidad",id, quantity)
+        const product = createCart.find(product => product.id === id)
+        if (!product) {
+            return createCart.push({id, quantity})
+        }
+        product.quantity = quantity
     }
 
     const renderItem = ({ item }) => {
         return (
             <ItemWithCheckbox
+                id={item.id}
                 title={`${item.title} (${item.quantity})`}
                 textWhite={false}
                 quantity={quantity}
@@ -29,7 +38,8 @@ const ProductsCartScreen = ({ navigation, route }) => {
     }
 
     const handleOnPress = () => {
-        console.log("Terminar compra")
+        dispatch(updateStockAfterPurchase(createCart))
+        dispatch(completePurchase())
     }
 
     return (

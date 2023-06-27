@@ -24,9 +24,12 @@ export const cartSlice = createSlice({
             } else {
                 product.quantity = quantity
             }
+        },
+        completePurchase: (state, action) => {
+            state.data.splice(0, state.data.length)
         }
     }
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, completePurchase } = cartSlice.actions
 export default cartSlice.reducer

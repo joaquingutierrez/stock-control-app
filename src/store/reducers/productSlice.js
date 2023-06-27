@@ -35,9 +35,17 @@ export const productSlice = createSlice({
             const {id, newStock} = action.payload
             const product = state.data.find(product => product.id === id)
             product.stock = newStock
+        },
+        updateStockAfterPurchase: (state, action) => {
+            const cart = action.payload
+            console.log(cart)
+            cart.map(item => {
+                const updateProductStock = state.data.find(product => product.id === item.id)
+                updateProductStock.stock += item.quantity
+            })
         }
     }
 })
 
-export const { addProduct, editProduct, deleteProduct, updateStock } = productSlice.actions
+export const { addProduct, editProduct, deleteProduct, updateStock, updateStockAfterPurchase } = productSlice.actions
 export default productSlice.reducer
