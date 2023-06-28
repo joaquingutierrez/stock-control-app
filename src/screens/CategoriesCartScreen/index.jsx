@@ -12,11 +12,13 @@ const CategoriesCartScreen = ({ navigation }) => {
     const onSelected = (item) => {
         navigation.navigate("ProductsCart", {
             name: item.title,
+            id: item.id
         });
     }
 
-    const quantityOfProductsByCategory = (category) => {
-        const productsFiltered = products.filter(product=> product.category === category)
+    const quantityOfProductsByCategory = (categoryId) => {
+        categoryId = categoryId.toString()
+        const productsFiltered = products.filter(product=> product.category === categoryId)
         const quantity = productsFiltered.length
         return quantity
     }
@@ -25,7 +27,7 @@ const CategoriesCartScreen = ({ navigation }) => {
         <View style={styles.container}>
             <FlatList style={styles.containerList}
                 data={categories}
-                renderItem={({ item }) => <ItemTouchable title={`${item.title} (${quantityOfProductsByCategory(item.title)})`} textWhite={false} onSelected={() => onSelected(item)} />}
+                renderItem={({ item }) => <ItemTouchable title={`${item.title} (${quantityOfProductsByCategory(item.id)})`} textWhite={false} onSelected={() => onSelected(item)} />}
                 keyExtractor={item => item.id}
             />
         </View>

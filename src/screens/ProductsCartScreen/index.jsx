@@ -11,8 +11,8 @@ const ProductsCartScreen = ({ navigation, route }) => {
     const productsCart = useSelector(state => state.cart.data)
     const dispatch = useDispatch()
 
-    const categoryName = route.params.name
-    const productsCartFiltered = productsCart.filter((product => product.category === categoryName))
+    const categoryId = route.params.id.toString()
+    const productsCartFiltered = productsCart.filter((product => product.category === categoryId))
     
     const createCart = []
     const quantity = (id, quantity) => {

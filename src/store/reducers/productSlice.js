@@ -31,8 +31,12 @@ export const productSlice = createSlice({
             const myProductIndex = state.data.findIndex(product => product.id === action.payload.id)
             state.data.splice(myProductIndex, 1)
         },
+        deleteAllProductsFromCategory: (state, action) => {
+            const categoryId = action.payload.id
+            state.data = state.data.filter(product=> product.category !== categoryId)
+        },
         updateStock: (state, action) => {
-            const {id, newStock} = action.payload
+            const { id, newStock } = action.payload
             const product = state.data.find(product => product.id === id)
             product.stock = newStock
         },

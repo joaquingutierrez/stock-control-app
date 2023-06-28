@@ -17,9 +17,19 @@ export const categorySlice = createSlice({
                 id: Date.now().toString()
             }
             state.data.push(newCategory)
+        },
+        editCategoryTitle: (state, action) => {
+            const { id, newTitle } = action.payload
+            const category = state.data.find(category => category.id === id)
+            category.title = newTitle
+        },
+        deleteCategory: (state, action) => {
+            const { id } = action.payload
+            const index = state.data.findIndex(category => category.id === id)
+            state.data.splice(index, 1)
         }
     }
 })
 
-export const { addCategory } = categorySlice.actions
+export const { addCategory, editCategoryTitle, deleteCategory } = categorySlice.actions
 export default categorySlice.reducer

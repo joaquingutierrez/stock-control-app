@@ -8,8 +8,8 @@ const ProductsScreen = ({ navigation, route }) => {
 
     const products = useSelector(state => state.product.data)
 
-    const categoryName = route.params.name
-    const productsFiltered = products.filter((product => product.category === categoryName))
+    const categoryId = route.params.categoryId.toString()
+    const productsFiltered = products.filter((product => product.category === categoryId))
 
     const onSelected = (item) => {
         navigation.navigate("ProductDetail", {

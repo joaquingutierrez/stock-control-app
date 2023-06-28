@@ -3,7 +3,7 @@ export const products = [
         id: 0,
         title: "Producto 0",
         description: "Descripcion del producto 0",
-        category: "Category 0",
+        category: "0",
         minimum: 4,
         stock: 8,
         image: "https://i.blogs.es/a19bfc/testing/1366_2000.jpg"
@@ -12,7 +12,7 @@ export const products = [
         id: 1,
         title: "Producto 1",
         description: "Descripcion del producto 1",
-        category: "Category 0",
+        category: "0",
         minimum: 4,
         stock: 8,
         image: null
@@ -21,7 +21,7 @@ export const products = [
         id: 2,
         title: "Producto 2",
         description: "Descripcion del producto 2",
-        category: "Category 0",
+        category: "0",
         minimum: 4,
         stock: 8,
         image: null
@@ -30,7 +30,7 @@ export const products = [
         id: 3,
         title: "Producto 3",
         description: "Descripcion del producto 3",
-        category: "Category 1",
+        category: "1",
         minimum: 4,
         stock: 8,
         image: null
@@ -39,7 +39,7 @@ export const products = [
         id: 4,
         title: "Producto 4",
         description: "Descripcion del producto 4",
-        category: "Category 1",
+        category: "1",
         minimum: 4,
         stock: 8,
         image: null
@@ -48,7 +48,7 @@ export const products = [
         id: 5,
         title: "Producto 5",
         description: "Descripcion del producto 5",
-        category: "Category 1",
+        category: "1",
         minimum: 4,
         stock: 8,
         image: null
@@ -57,7 +57,7 @@ export const products = [
         id: 6,
         title: "Producto 6",
         description: "Descripcion del producto 6",
-        category: "Category 2",
+        category: "2",
         minimum: 4,
         stock: 8,
         image: null
@@ -66,7 +66,7 @@ export const products = [
         id: 7,
         title: "Producto 7",
         description: "Descripcion del producto 7",
-        category: "Category 2",
+        category: "2",
         minimum: 4,
         stock: 8,
         image: null
@@ -75,7 +75,7 @@ export const products = [
         id: 8,
         title: "Producto 8",
         description: "Descripcion del producto 8",
-        category: "Category 2",
+        category: "2",
         minimum: 4,
         stock: 8,
         image: null
