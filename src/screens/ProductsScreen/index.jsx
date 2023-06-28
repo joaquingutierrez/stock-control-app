@@ -9,7 +9,12 @@ const ProductsScreen = ({ navigation, route }) => {
     const products = useSelector(state => state.product.data)
 
     const categoryId = route.params.categoryId.toString()
-    const productsFiltered = products.filter((product => product.category === categoryId))
+    let productsFiltered = []
+    if (categoryId !== "-1") {
+        productsFiltered = products.filter((product => product.category === categoryId))
+    } else {
+        productsFiltered = products
+    }
 
     const onSelected = (item) => {
         navigation.navigate("ProductDetail", {

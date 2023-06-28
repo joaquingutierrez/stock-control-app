@@ -18,13 +18,14 @@ const CategoriesCartScreen = ({ navigation }) => {
 
     const quantityOfProductsByCategory = (categoryId) => {
         categoryId = categoryId.toString()
-        const productsFiltered = products.filter(product=> product.category === categoryId)
+        const productsFiltered = products.filter(product => product.category === categoryId)
         const quantity = productsFiltered.length
         return quantity
     }
 
     return (
         <View style={styles.container}>
+            <ItemTouchable title="Todos los Productos" textWhite={false} onSelected={() => onSelected({ title: "all", id: "-1" })} />
             <FlatList style={styles.containerList}
                 data={categories}
                 renderItem={({ item }) => <ItemTouchable title={`${item.title} (${quantityOfProductsByCategory(item.id)})`} textWhite={false} onSelected={() => onSelected(item)} />}

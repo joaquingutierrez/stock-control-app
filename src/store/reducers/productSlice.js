@@ -34,7 +34,6 @@ export const productSlice = createSlice({
         deleteAllProductsFromCategory: (state, action) => {
             const categoryId = action.payload.id
             state.data = state.data.filter(product=> product.category !== categoryId)
-            console.log(state.data)
         },
         updateStock: (state, action) => {
             const { id, newStock } = action.payload
@@ -43,7 +42,6 @@ export const productSlice = createSlice({
         },
         updateStockAfterPurchase: (state, action) => {
             const cart = action.payload
-            console.log(cart)
             cart.map(item => {
                 const updateProductStock = state.data.find(product => product.id === item.id)
                 updateProductStock.stock += item.quantity

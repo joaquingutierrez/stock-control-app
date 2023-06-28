@@ -12,7 +12,12 @@ const ProductsCartScreen = ({ navigation, route }) => {
     const dispatch = useDispatch()
 
     const categoryId = route.params.id.toString()
-    const productsCartFiltered = productsCart.filter((product => product.category === categoryId))
+    let productsCartFiltered = []
+    if (categoryId !== "-1") {
+        productsCartFiltered = productsCart.filter((product => product.category === categoryId))
+    } else {
+        productsCartFiltered = productsCart
+    }
     
     const createCart = []
     const quantity = (id, quantity) => {
