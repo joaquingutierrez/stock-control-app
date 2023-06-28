@@ -29,8 +29,8 @@ const EditProductScreen = ({ navigation, route }) => {
         setDescription(e)
     }
 
-    const handleCategory = (title) => {
-        setCategory(title)
+    const handleCategory = (category) => {
+        setCategory(category)
     }
 
     const handleImage = (URI) => {
@@ -59,7 +59,7 @@ const EditProductScreen = ({ navigation, route }) => {
         const product = {
             title: title,
             description: description,
-            category: category,
+            category: category.id,
             minimum: min,
             stock: stock,
             image: image,

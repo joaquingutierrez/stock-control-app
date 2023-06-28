@@ -34,6 +34,7 @@ export const productSlice = createSlice({
         deleteAllProductsFromCategory: (state, action) => {
             const categoryId = action.payload.id
             state.data = state.data.filter(product=> product.category !== categoryId)
+            console.log(state.data)
         },
         updateStock: (state, action) => {
             const { id, newStock } = action.payload
@@ -51,5 +52,5 @@ export const productSlice = createSlice({
     }
 })
 
-export const { addProduct, editProduct, deleteProduct, updateStock, updateStockAfterPurchase } = productSlice.actions
+export const { addProduct, editProduct, deleteProduct, deleteAllProductsFromCategory, updateStock, updateStockAfterPurchase } = productSlice.actions
 export default productSlice.reducer

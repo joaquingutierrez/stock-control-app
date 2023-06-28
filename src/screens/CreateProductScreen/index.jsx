@@ -12,12 +12,13 @@ const CreateProductScreen = () => {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [category, setCategory] = useState("")
+    const [category, setCategory] = useState({})
     const [image, setImage] = useState("")
     const [min, setMin] = useState(0)
     const [stock, setStock] = useState(0)
     const dispatch = useDispatch()
     const categories = useSelector(status => status.category.data)
+
 
     const onHandleTitle = (e) => {
         setTitle(e)
@@ -26,8 +27,8 @@ const CreateProductScreen = () => {
         setDescription(e)
     }
 
-    const handleCategory = (title) => {
-        setCategory(title)
+    const handleCategory = (category) => {
+        setCategory(category)
     }
 
     const handleImage = (URI) => {
@@ -57,7 +58,7 @@ const CreateProductScreen = () => {
         const product = {
             title: title,
             description: description,
-            category: category,
+            category: category.id,
             minimum: min,
             stock: stock,
             image: image
@@ -65,7 +66,7 @@ const CreateProductScreen = () => {
         dispatch(addProduct(product))
         setTitle("")
         setDescription("")
-        setCategory("")
+        setCategory({})
         setImage("")
         setMin(0)
         setStock(0)

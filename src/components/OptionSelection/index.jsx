@@ -7,12 +7,10 @@ import CustomText from "../CustomText";
 const OptionSelection = ({ options, handleOptionSelect, value}) => {
 
     const [modalVisible, setModalVisible] = useState(false)
-    /* const [category, setCategory] = useState("Seleccionar...") */
 
     const handleSelection = (item) => {
-        handleOptionSelect(item.title)
-        setModalVisible(false)/* 
-        setCategory(item.title) */
+        handleOptionSelect(item)
+        setModalVisible(false)
     }
 
     const renderItem = ({ item }) => {

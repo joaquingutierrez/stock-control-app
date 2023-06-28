@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { styles } from "./style"
 import { LabelAndInput } from "../../components";
 import { deleteCategory, editCategoryTitle } from "../../store/reducers/categotySlice";
+import { deleteAllProductsFromCategory } from "../../store/reducers/productSlice";
 
 const EditCategoryScreen = ({ navigation, route }) => {
 
@@ -31,18 +32,16 @@ const EditCategoryScreen = ({ navigation, route }) => {
         }
     }
     const handleDeleteCategory = (item) => {
-        
             const payload = {
                 id: route.params.item.id,
-                newTitle: categoryTitle
             }
-            dispatch(editCategoryTitle(payload))
             setCategoryTitle("")
             Alert.alert("Borrar Categoría", "Esta acción tambien borrará los productos que pertenezcan a la misma. ¿Desea continuar?", [
                 {
                     text: "Sí",
                     onPress: () => {
-                        dispatch(deleteCategory({id: item.id}))
+                        dispatch(deleteCategory(payload))
+                        dispatch(deleteAllProductsFromCategory(payload))
                         navigation.navigate("Categories")
                     }
                 },
