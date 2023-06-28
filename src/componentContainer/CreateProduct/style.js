@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../constants/theme";
 
 export const styles = StyleSheet.create({
     container: {
@@ -18,5 +19,21 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         width: "85%",
+    },
+    imageAndTakeImage: {
+        flexDirection: "column",
+        height: 162,
+    },
+    imageContainer: {
+        borderWidth: 4,
+        width: 192,
+        height: 108,
+        borderColor: colors.primary,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    image: {
+        width: "100%",
+        height: "100%",
     }
 })

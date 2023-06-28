@@ -1,7 +1,8 @@
-import { View, Button } from "react-native"
+import { View, Button, Image, Text } from "react-native"
+import { useState } from "react"
 
 import { styles } from "./style"
-import { LabelAndInput, OptionSelection, InputNumber } from "../../components"
+import { LabelAndInput, OptionSelection, InputNumber, ImageSelector } from "../../components"
 import CustomText from "../../components/CustomText"
 
 const CreateProduct = ({ onHandleTitle,
@@ -11,6 +12,7 @@ const CreateProduct = ({ onHandleTitle,
     handleMinAdd,
     handleStockSubstract,
     handleStockAdd,
+    handleImage,
     title,
     description,
     category,
@@ -19,6 +21,13 @@ const CreateProduct = ({ onHandleTitle,
     categories,
     image
 }) => {
+
+    const [imageURI, setImageURI] = useState("")
+
+    const onImage = (uri) => {
+        setImageURI(uri)
+        handleImage(uri)
+    }
 
     return (
         <View style={styles.container}>
@@ -58,7 +67,16 @@ const CreateProduct = ({ onHandleTitle,
             </View>
             <View style={styles.labelAndComponent}>
                 <CustomText myCustomText="Imagen: " />
-                <CustomText myCustomText="Subir imagen" />
+                <View style={styles.imageAndTakeImage}>
+                    <View style={styles.imageContainer}>
+                        {image ? (
+                            <Image style={styles.image} source={{ uri: image }} />
+                        ) : (
+                            <Text>Imagen no encontrada</Text>
+                        )}
+                    </View>
+                    <ImageSelector onImage={onImage} />
+                </View>
             </View>
         </View>
     )

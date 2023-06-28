@@ -33,6 +33,10 @@ const EditProductScreen = ({ navigation, route }) => {
         setCategory(title)
     }
 
+    const handleImage = (URI) => {
+        setImage(URI)
+    }
+
     const handleMinSubstract = () => {
         const update = min - 1
         setMin(update)
@@ -99,6 +103,7 @@ const EditProductScreen = ({ navigation, route }) => {
                         onHandleTitle={onHandleTitle}
                         onHandleDescription={onHandleDescription}
                         handleCategory={handleCategory}
+                        handleImage={handleImage}
                         handleMinSubstract={handleMinSubstract}
                         handleMinAdd={handleMinAdd}
                         handleStockSubstract={handleStockSubstract}
