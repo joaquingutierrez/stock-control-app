@@ -6,6 +6,7 @@ export const getAllCategoriesCloud = async () => {
     try {
         const response = await fetch(`${URL_API}/${userID}/categories.json`)
         const data = await response.json()
+        if (!data) return
         const categories = Object.values(data)
         const ids = Object.keys(data)
         categories.map((category, index) => {

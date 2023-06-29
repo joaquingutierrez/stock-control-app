@@ -6,6 +6,7 @@ export const getCartCloud = async () => {
     try {
         const response = await fetch(`${URL_API}/${userID}/cart.json`)
         const data = await response.json()
+        if (!data) return
         const products = Object.values(data)
         const ids = Object.keys(data)
         products.map((product, index) => {
