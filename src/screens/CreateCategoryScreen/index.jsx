@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { styles } from "./style"
 import { LabelAndInput } from "../../components";
 import { addCategory } from "../../store/reducers/categotySlice";
+import { addCategoryCloud } from "../../store/cloud/categoryStoreCloud";
 
 const CreateCategoryScreen = () => {
 
@@ -14,9 +15,10 @@ const CreateCategoryScreen = () => {
     const onHandleInput = (e) => {
         setCategoryTitle(e)
     }
-    const handleNewCategory = () => {
+    const handleNewCategory = async () => {
         if (categoryTitle) {
-            dispatch(addCategory(categoryTitle))
+            const categoryId = await addCategoryCloud(categoryTitle)
+            dispatch(addCategory({title: categoryTitle, id: categoryId}))
             setCategoryTitle("")
             Alert.alert("Categoría agregada", "", [
                 {

@@ -1,10 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { CreateNavigation, InventoryNavigation, CartNavigation } from '../index';
 import { getAllProductsCloud } from '../../store/cloud/productsStoreCloud';
 import { getProducts } from '../../store/reducers/productSlice';
-import { useEffect } from 'react';
+import { getAllCategoriesCloud } from '../../store/cloud/categoryStoreCloud';
+import { getCategories } from '../../store/reducers/categotySlice';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +19,9 @@ const MyTabs = () => {
         const fetchData = async () => {
             const products = await getAllProductsCloud()
             dispatch(getProducts(products))
+
+            const categories = await getAllCategoriesCloud()
+            dispatch(getCategories(categories))
         }
         fetchData()
     }, [])

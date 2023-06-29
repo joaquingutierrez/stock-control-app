@@ -7,6 +7,8 @@ import { LabelAndInput } from "../../components";
 import { deleteCategory, editCategoryTitle } from "../../store/reducers/categotySlice";
 import { deleteAllProductsFromCategory } from "../../store/reducers/productSlice";
 import { deleteAllProductsFromCategoryCloud } from "../../store/cloud/productsStoreCloud";
+import { editCategoryTitleCloud } from "../../store/cloud/categoryStoreCloud";
+import { deleteCategoryCloud } from "../../store/cloud/categoryStoreCloud";
 
 const EditCategoryScreen = ({ navigation, route }) => {
     
@@ -23,6 +25,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
                 id: route.params.item.id,
                 newTitle: categoryTitle
             }
+            editCategoryTitleCloud(payload)
             dispatch(editCategoryTitle(payload))
             setCategoryTitle("")
             Alert.alert("Categoría Modificada", "", [
@@ -42,6 +45,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
             {
                 text: "Sí",
                 onPress: () => {
+                    deleteCategoryCloud(payload.id)
                     dispatch(deleteCategory(payload))
                     const productsFiltered = products.filter(product => product.category === route.params.item.id)
                     deleteAllProductsFromCategoryCloud(productsFiltered)
