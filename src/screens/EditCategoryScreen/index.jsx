@@ -6,7 +6,7 @@ import { styles } from "./style"
 import { LabelAndInput } from "../../components";
 import { deleteCategory, editCategoryTitle } from "../../store/reducers/categotySlice";
 import { deleteAllProductsFromCategory } from "../../store/reducers/productSlice";
-import { deleteAllProductsFromCategoryCloud } from "../../store/cloud";
+import { deleteAllProductsFromCategoryCloud } from "../../store/cloud/productsStoreCloud";
 
 const EditCategoryScreen = ({ navigation, route }) => {
     

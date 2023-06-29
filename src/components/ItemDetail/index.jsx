@@ -7,7 +7,7 @@ import CustomText from "../CustomText"
 import ButtonAndInput from "../ButtonAndInput"
 import { updateStock } from "../../store/reducers/productSlice"
 import { addToCart } from "../../store/reducers/cartSlice"
-import { updateStockCloud } from "../../store/cloud"
+import { updateStockCloud } from "../../store/cloud/productsStoreCloud"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 

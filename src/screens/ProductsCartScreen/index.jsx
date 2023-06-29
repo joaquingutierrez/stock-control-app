@@ -5,7 +5,7 @@ import { styles } from "./style"
 import { ItemWithCheckbox } from "../../components"
 import { completePurchase } from "../../store/reducers/cartSlice";
 import { updateStockAfterPurchase } from "../../store/reducers/productSlice";
-import { updateStockAfterPurchaseCloud } from "../../store/cloud";
+import { updateStockAfterPurchaseCloud } from "../../store/cloud/productsStoreCloud";
 
 const ProductsCartScreen = ({ navigation, route }) => {
 

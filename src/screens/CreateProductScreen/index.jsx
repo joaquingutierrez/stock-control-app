@@ -7,7 +7,7 @@ import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
 import CustomText from "../../components/CustomText";
 import { addProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
-import { addProductCloud } from "../../store/cloud";
+import { addProductCloud } from "../../store/cloud/productsStoreCloud";
 
 const CreateProductScreen = () => {
 

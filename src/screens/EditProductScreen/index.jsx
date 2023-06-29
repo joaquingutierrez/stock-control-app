@@ -6,7 +6,7 @@ import { styles } from "./style"
 import { editProduct, deleteProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import CustomText from "../../components/CustomText";
-import { deleteProductCloud, editProductCloud } from "../../store/cloud";
+import { deleteProductCloud, editProductCloud } from "../../store/cloud/productsStoreCloud";
 
 const EditProductScreen = ({ navigation, route }) => {
 

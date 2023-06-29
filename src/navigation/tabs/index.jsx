@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useDispatch } from 'react-redux';
 
 import { CreateNavigation, InventoryNavigation, CartNavigation } from '../index';
-import { getAllProductsCloud } from '../../store/cloud';
+import { getAllProductsCloud } from '../../store/cloud/productsStoreCloud';
 import { getProducts } from '../../store/reducers/productSlice';
 import { useEffect } from 'react';
 
