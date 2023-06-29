@@ -1,8 +1,7 @@
-import { View, Button, Text, Image, Alert } from "react-native"
+import { View, Button, Alert } from "react-native"
 import { requestCameraPermissionsAsync, launchCameraAsync } from "expo-image-picker"
 
 import { styles } from "./style"
-import { useState } from "react"
 
 const ImageSelector = ({ onImage }) => {
 

@@ -6,6 +6,7 @@ import { styles } from "./style"
 import { editProduct, deleteProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import CustomText from "../../components/CustomText";
+import { editProductCloud } from "../../store/cloud";
 
 const EditProductScreen = ({ navigation, route }) => {
 
@@ -16,7 +17,7 @@ const EditProductScreen = ({ navigation, route }) => {
 
     const [title, setTitle] = useState(product.title)
     const [description, setDescription] = useState(product.description)
-    const [category, setCategory] = useState(product.category)
+    const [category, setCategory] = useState(product.category || "")
     const [image, setImage] = useState(product.image)
     const [min, setMin] = useState(product.minimum)
     const [stock, setStock] = useState(product.stock)
@@ -55,7 +56,7 @@ const EditProductScreen = ({ navigation, route }) => {
         setStock(update)
     }
 
-    const handleEditProduct = () => {
+    const handleEditProduct = async () => {
         const product = {
             title: title,
             description: description,
@@ -65,13 +66,8 @@ const EditProductScreen = ({ navigation, route }) => {
             image: image,
             id: route.params.id
         }
+        editProductCloud(product)
         dispatch(editProduct(product))
-        setTitle("")
-        setDescription("")
-        setCategory("")
-        setImage("")
-        setMin(0)
-        setStock(0)
         Alert.alert("Producto modificado", "", [
             {
                 text: "Aceptar",

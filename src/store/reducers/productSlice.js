@@ -11,10 +11,12 @@ export const productSlice = createSlice({
     name: "product",
     initialState,
     reducers: {
+        getProducts: (state, action) => {
+            state.data = action.payload
+        },
         addProduct: (state, action) => {
             const newProduct = {
-                ...action.payload,
-                id: Date.now().toString()
+                ...action.payload
             }
             state.data.push(newProduct)
         },
@@ -33,7 +35,7 @@ export const productSlice = createSlice({
         },
         deleteAllProductsFromCategory: (state, action) => {
             const categoryId = action.payload.id
-            state.data = state.data.filter(product=> product.category !== categoryId)
+            state.data = state.data.filter(product => product.category !== categoryId)
         },
         updateStock: (state, action) => {
             const { id, newStock } = action.payload
@@ -50,5 +52,5 @@ export const productSlice = createSlice({
     }
 })
 
-export const { addProduct, editProduct, deleteProduct, deleteAllProductsFromCategory, updateStock, updateStockAfterPurchase } = productSlice.actions
+export const { addProduct, editProduct, deleteProduct, deleteAllProductsFromCategory, updateStock, updateStockAfterPurchase, getProducts } = productSlice.actions
 export default productSlice.reducer

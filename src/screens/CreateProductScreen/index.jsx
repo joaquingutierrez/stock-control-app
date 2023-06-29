@@ -7,6 +7,7 @@ import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
 import CustomText from "../../components/CustomText";
 import { addProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
+import { addProductCloud } from "../../store/cloud";
 
 const CreateProductScreen = () => {
 
@@ -54,15 +55,17 @@ const CreateProductScreen = () => {
         setStock(update)
     }
 
-    const handleNewProduct = () => {
+    const handleNewProduct = async () => {
         const product = {
             title: title,
             description: description,
-            category: category.id,
+            category: category.id || "",
             minimum: min,
             stock: stock,
             image: image
         }
+        const dataId = await addProductCloud(product)
+        product.id = dataId
         dispatch(addProduct(product))
         setTitle("")
         setDescription("")

@@ -21,7 +21,6 @@ const ProductsCartScreen = ({ navigation, route }) => {
     
     const createCart = []
     const quantity = (id, quantity) => {
-        console.log("Cantidad",id, quantity)
         const product = createCart.find(product => product.id === id)
         if (!product) {
             return createCart.push({id, quantity})

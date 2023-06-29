@@ -21,7 +21,6 @@ const ItemDetail = ({ item, handleAddToCart }) => {
         setNumber(number - 1)
     }
     const handleOnpress = () => {
-        console.log("Actualizar", number)
         const productId = item.id
         const newStock = number
         const payload = {

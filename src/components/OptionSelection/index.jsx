@@ -53,7 +53,7 @@ const OptionSelection = ({ options, handleOptionSelect, value}) => {
             <Pressable
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>{value || "Seleccionar..."}</Text>
+                <Text style={styles.textStyle}>{"Seleccionar..."}</Text>
             </Pressable>
         </View>
     )
