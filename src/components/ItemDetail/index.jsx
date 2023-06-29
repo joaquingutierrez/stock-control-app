@@ -7,6 +7,7 @@ import CustomText from "../CustomText"
 import ButtonAndInput from "../ButtonAndInput"
 import { updateStock } from "../../store/reducers/productSlice"
 import { addToCart } from "../../store/reducers/cartSlice"
+import { updateStockCloud } from "../../store/cloud"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
@@ -27,6 +28,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
             id: productId,
             newStock: newStock
         }
+        updateStockCloud(productId, newStock)
         dispatch(updateStock(payload))
         if (newStock < item.minimum) {
             const payload = {

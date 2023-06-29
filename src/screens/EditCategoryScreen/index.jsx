@@ -1,17 +1,19 @@
 import { View, Button, Alert } from "react-native";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./style"
 import { LabelAndInput } from "../../components";
 import { deleteCategory, editCategoryTitle } from "../../store/reducers/categotySlice";
 import { deleteAllProductsFromCategory } from "../../store/reducers/productSlice";
+import { deleteAllProductsFromCategoryCloud } from "../../store/cloud";
 
 const EditCategoryScreen = ({ navigation, route }) => {
-
+    
     const [categoryTitle, setCategoryTitle] = useState("")
     const dispatch = useDispatch()
-
+    const products = useSelector(state => state.product.data)
+    
     const onHandleInput = (e) => {
         setCategoryTitle(e)
     }
@@ -32,24 +34,26 @@ const EditCategoryScreen = ({ navigation, route }) => {
         }
     }
     const handleDeleteCategory = (item) => {
-            const payload = {
-                id: route.params.item.id,
-            }
-            setCategoryTitle("")
-            Alert.alert("Borrar Categoría", "Esta acción tambien borrará los productos que pertenezcan a la misma. ¿Desea continuar?", [
-                {
-                    text: "Sí",
-                    onPress: () => {
-                        dispatch(deleteCategory(payload))
-                        dispatch(deleteAllProductsFromCategory(payload))
-                        navigation.navigate("Categories")
-                    }
-                },
-                {
-                    text: "No"
+        const payload = {
+            id: route.params.item.id,
+        }
+        setCategoryTitle("")
+        Alert.alert("Borrar Categoría", "Esta acción tambien borrará los productos que pertenezcan a la misma. ¿Desea continuar?", [
+            {
+                text: "Sí",
+                onPress: () => {
+                    dispatch(deleteCategory(payload))
+                    const productsFiltered = products.filter(product => product.category === route.params.item.id)
+                    deleteAllProductsFromCategoryCloud(productsFiltered)
+                    dispatch(deleteAllProductsFromCategory(payload))
+                    navigation.navigate("Categories")
                 }
-            ])
-    
+            },
+            {
+                text: "No"
+            }
+        ])
+
     }
 
     return (

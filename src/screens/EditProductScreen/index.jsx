@@ -6,7 +6,7 @@ import { styles } from "./style"
 import { editProduct, deleteProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import CustomText from "../../components/CustomText";
-import { editProductCloud } from "../../store/cloud";
+import { deleteProductCloud, editProductCloud } from "../../store/cloud";
 
 const EditProductScreen = ({ navigation, route }) => {
 
@@ -81,6 +81,7 @@ const EditProductScreen = ({ navigation, route }) => {
             {
                 text: "Sí",
                 onPress: () => {
+                    deleteProductCloud(product.id)
                     dispatch(deleteProduct(product))
                     navigation.navigate("Categories");
                 }
