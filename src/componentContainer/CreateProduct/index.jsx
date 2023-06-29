@@ -1,5 +1,6 @@
-import { View, Button, Image, Text } from "react-native"
+import { View, Image, Text } from "react-native"
 import { useState } from "react"
+import * as FileSystem from "expo-file-system"
 
 import { styles } from "./style"
 import { LabelAndInput, OptionSelection, InputNumber, ImageSelector } from "../../components"
@@ -25,8 +26,19 @@ const CreateProduct = ({ onHandleTitle,
     const [imageURI, setImageURI] = useState("")
 
     const onImage = (uri) => {
-        setImageURI(uri)
-        handleImage(uri)
+        const fileName = uri.split("/").pop()
+        const path = FileSystem.documentDirectory + fileName
+        try {
+            FileSystem.moveAsync({
+                from: uri,
+                to: path
+            })
+            setImageURI(path)
+            handleImage(path)
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 
     return (
