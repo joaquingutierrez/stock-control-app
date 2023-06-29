@@ -7,6 +7,8 @@ import { getAllProductsCloud } from '../../store/cloud/productsStoreCloud';
 import { getProducts } from '../../store/reducers/productSlice';
 import { getAllCategoriesCloud } from '../../store/cloud/categoryStoreCloud';
 import { getCategories } from '../../store/reducers/categotySlice';
+import { getCartCloud } from '../../store/cloud/cartStoreCloud';
+import { getCart } from '../../store/reducers/cartSlice';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +24,9 @@ const MyTabs = () => {
 
             const categories = await getAllCategoriesCloud()
             dispatch(getCategories(categories))
+
+            const cart = await getCartCloud()
+            dispatch(getCart(cart))
         }
         fetchData()
     }, [])

@@ -6,6 +6,7 @@ import { styles } from "./style"
 import { InputNumber, ItemDetail } from "../../components";
 import CustomText from "../../components/CustomText";
 import { addToCart } from "../../store/reducers/cartSlice";
+import { addToCartCloud } from "../../store/cloud/cartStoreCloud";
 
 const ProductDetailScreen = ({ route }) => {
     
@@ -24,6 +25,7 @@ const ProductDetailScreen = ({ route }) => {
             item: product,
             quantity: number
         }
+        addToCartCloud(payload)
         dispatch(addToCart(payload))
         setModalVisible(false)
     }

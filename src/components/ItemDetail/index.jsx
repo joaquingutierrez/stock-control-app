@@ -8,6 +8,7 @@ import ButtonAndInput from "../ButtonAndInput"
 import { updateStock } from "../../store/reducers/productSlice"
 import { addToCart } from "../../store/reducers/cartSlice"
 import { updateStockCloud } from "../../store/cloud/productsStoreCloud"
+import { addToCartCloud } from "../../store/cloud/cartStoreCloud"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
@@ -35,6 +36,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
                 item: item,
                 quantity: item.minimum - newStock
             }
+            addToCartCloud(payload)
             dispatch(addToCart(payload))
         }
     }

@@ -6,6 +6,7 @@ import { ItemWithCheckbox } from "../../components"
 import { completePurchase } from "../../store/reducers/cartSlice";
 import { updateStockAfterPurchase } from "../../store/reducers/productSlice";
 import { updateStockAfterPurchaseCloud } from "../../store/cloud/productsStoreCloud";
+import { completePurchaseCloud } from "../../store/cloud/cartStoreCloud";
 
 const ProductsCartScreen = ({ navigation, route }) => {
 
@@ -45,6 +46,7 @@ const ProductsCartScreen = ({ navigation, route }) => {
     const handleOnPress = () => {
         updateStockAfterPurchaseCloud(createCart)
         dispatch(updateStockAfterPurchase(createCart))
+        completePurchaseCloud()
         dispatch(completePurchase())
     }
 
