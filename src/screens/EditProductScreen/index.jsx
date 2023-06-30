@@ -1,12 +1,14 @@
 import { View, Alert, Button } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import * as FileSystem from "expo-file-system"
 
 import { styles } from "./style"
 import { editProduct, deleteProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import CustomText from "../../components/CustomText";
 import { deleteProductCloud, editProductCloud } from "../../store/cloud/productsStoreCloud";
+import { moveFile, deleteFile } from "../../store/fileStore";
 
 const EditProductScreen = ({ navigation, route }) => {
 
@@ -34,8 +36,12 @@ const EditProductScreen = ({ navigation, route }) => {
         setCategory(category)
     }
 
-    const handleImage = (URI) => {
-        setImage(URI)
+    const handleImage = (uri) => {
+        deleteFile(product.image)
+        const fileName = uri.split("/").pop()
+        const path = FileSystem.documentDirectory + fileName
+        moveFile(uri, path)
+        setImage(path)
     }
 
     const handleMinSubstract = () => {

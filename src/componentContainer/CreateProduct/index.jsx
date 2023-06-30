@@ -5,6 +5,7 @@ import * as FileSystem from "expo-file-system"
 import { styles } from "./style"
 import { LabelAndInput, OptionSelection, InputNumber, ImageSelector } from "../../components"
 import CustomText from "../../components/CustomText"
+import { moveFile } from "../../store/fileStore"
 
 const CreateProduct = ({ onHandleTitle,
     onHandleDescription,
@@ -28,17 +29,9 @@ const CreateProduct = ({ onHandleTitle,
     const onImage = (uri) => {
         const fileName = uri.split("/").pop()
         const path = FileSystem.documentDirectory + fileName
-        try {
-            FileSystem.moveAsync({
-                from: uri,
-                to: path
-            })
-            setImageURI(path)
-            handleImage(path)
-        }
-        catch (err) {
-            console.log(err)
-        }
+        moveFile(uri, path)
+        setImageURI(path)
+        handleImage(path)
     }
 
     return (

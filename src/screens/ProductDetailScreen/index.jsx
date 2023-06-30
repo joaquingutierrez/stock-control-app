@@ -9,7 +9,7 @@ import { addToCart } from "../../store/reducers/cartSlice";
 import { addToCartCloud } from "../../store/cloud/cartStoreCloud";
 
 const ProductDetailScreen = ({ route }) => {
-    
+
     const dispatch = useDispatch()
     const products = useSelector(state => state.product.data)
     const [modalVisible, setModalVisible] = useState(false);
@@ -57,8 +57,8 @@ const ProductDetailScreen = ({ route }) => {
                                 <Text style={styles.modalText}>Cantidad a agregar:</Text>
                                 <InputNumber number={number} handleNumberSubstract={handleNumberSubstract} handleNumberAdd={handleNumberAdd} />
                                 <View>
-                                    <Button title="Aceptar" onPress={dispatchAddToCart}/>
-                                    <Button title="Cancelar" onPress={()=>setModalVisible(false)} />
+                                    <Button title="Aceptar" onPress={dispatchAddToCart} />
+                                    <Button title="Cancelar" onPress={() => setModalVisible(false)} />
                                 </View>
                             </View>
                         </View>
