@@ -17,7 +17,7 @@ const MyTabs = () => {
 
     const dispatch = useDispatch()
 
-    useEffect(()=> {
+    useEffect(() => {
         const fetchData = async () => {
             const products = await getAllProductsCloud()
             dispatch(getProducts(products))

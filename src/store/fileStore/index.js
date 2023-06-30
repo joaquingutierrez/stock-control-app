@@ -20,3 +20,27 @@ export const moveFile = async (fromUri, TofileUri) => {
         console.log(err)
     }
 }
+
+export const getPersistence = async () => {
+    const path = FileSystem.documentDirectory + "persistence.json"
+    try {
+        const persistence = await FileSystem.readAsStringAsync(path)
+        console.log("Persistencia obtenida con exito")
+        return persistence
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+export const savePersistence = async (persistence) => {
+    const path = FileSystem.documentDirectory + "persistence.json"
+    try {
+        const fileContent = JSON.stringify({ persistence: persistence })
+        await FileSystem.writeAsStringAsync(path, fileContent);
+        console.log('Variable guardada exitosamente en el archivo.');
+    }
+    catch (err) {
+        console.log(err)
+    }
+}

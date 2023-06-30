@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native';
 
-import { CategoriesScreen, ProductsScreen, ProductDetailScreen, EditProductScreen, EditCategotyScreen} from "../../screens"
+import { CategoriesScreen, ProductsScreen, ProductDetailScreen, EditProductScreen, EditCategotyScreen, AppOptionsScreen } from "../../screens"
 
 const Stack = createStackNavigator();
 
@@ -11,9 +11,10 @@ const InventoryNavigation = () => {
             initialRouteName="Categories"
         >
             <Stack.Screen name="Categories" component={CategoriesScreen}
-                options={{
-                    title: "Categorias"
-                }}
+                options={({ navigation }) => ({
+                    title: "Categorias",
+                    headerRight: () => <Button title="Opciones" onPress={() => navigation.navigate("AppOptions")} />
+                })}
             />
             <Stack.Screen name="Products" component={ProductsScreen}
                 options={({ route }) => ({
@@ -35,6 +36,11 @@ const InventoryNavigation = () => {
                 options={({ route }) => ({
                     title: "Editar " + route.params.item.title,
                 })}
+            />
+            <Stack.Screen name="AppOptions" component={AppOptionsScreen}
+            options={{
+                title: "Opciones"
+            }}
             />
         </Stack.Navigator>
     );
