@@ -6,10 +6,14 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.primary,
         width: "100%",
-        paddingVertical: 4,
+        paddingVertical: 20,
         marginVertical: 10,
+        borderRadius: 10,
     },
     danger: {
         backgroundColor: "red",
+    },
+    textContainer: {
+        marginLeft: 25,
     }
 })

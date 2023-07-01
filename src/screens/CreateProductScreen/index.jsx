@@ -1,10 +1,8 @@
-import { View, Button, Alert } from "react-native";
+import { View, Button, Alert, Keyboard, KeyboardAvoidingView } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./style"
-import { LabelAndInput, OptionSelection, InputNumber } from "../../components";
-import CustomText from "../../components/CustomText";
 import { addProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import { addProductCloud } from "../../store/cloud/productsStoreCloud";
@@ -86,23 +84,28 @@ const CreateProductScreen = () => {
 
     return (
         <View style={styles.container}>
-            <CreateProduct
-                onHandleTitle={onHandleTitle}
-                onHandleDescription={onHandleDescription}
-                handleCategory={handleCategory}
-                handleImage={handleImage}
-                handleMinSubstract={handleMinSubstract}
-                handleMinAdd={handleMinAdd}
-                handleStockSubstract={handleStockSubstract}
-                handleStockAdd={handleStockAdd}
-                title={title}
-                description={description}
-                category={category}
-                min={min}
-                stock={stock}
-                categories={categories}
-                image={image}
-            />
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+                <CreateProduct
+                    onHandleTitle={onHandleTitle}
+                    onHandleDescription={onHandleDescription}
+                    handleCategory={handleCategory}
+                    handleImage={handleImage}
+                    handleMinSubstract={handleMinSubstract}
+                    handleMinAdd={handleMinAdd}
+                    handleStockSubstract={handleStockSubstract}
+                    handleStockAdd={handleStockAdd}
+                    title={title}
+                    description={description}
+                    category={category}
+                    min={min}
+                    stock={stock}
+                    categories={categories}
+                    image={image}
+                />
+            </KeyboardAvoidingView>
             <Button
                 title="Crear Producto"
                 onPress={handleNewProduct}

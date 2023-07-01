@@ -51,7 +51,7 @@ const CreateProduct = ({ onHandleTitle,
             <OptionSelection
                 options={categories}
                 handleOptionSelect={handleCategory}
-                value={category}
+                value={category.title}
             />
             <View style={styles.labelAndComponent}>
                 <CustomText myCustomText="Mínimo: " />

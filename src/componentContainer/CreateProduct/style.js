@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         gap: 30,
-        margin: "auto",
         width: "100%",
     },
     input: {

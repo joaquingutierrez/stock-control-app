@@ -4,7 +4,7 @@ import { useState } from "react";
 import { styles } from "./style"
 import CustomText from "../CustomText";
 
-const OptionSelection = ({ options, handleOptionSelect, value}) => {
+const OptionSelection = ({ options, handleOptionSelect, value }) => {
 
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -15,7 +15,7 @@ const OptionSelection = ({ options, handleOptionSelect, value}) => {
 
     const renderItem = ({ item }) => {
         return (
-            <TouchableOpacity onPress={() => handleSelection(item)}>
+            <TouchableOpacity style={styles.optionContainer} onPress={() => handleSelection(item)}>
                 <CustomText
                     myCustomText={item.title}
                 />
@@ -36,7 +36,7 @@ const OptionSelection = ({ options, handleOptionSelect, value}) => {
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View>
-                            <FlatList style={styles.containerList}
+                            <FlatList
                                 data={options}
                                 renderItem={renderItem}
                                 keyExtractor={item => item.id}
@@ -53,7 +53,7 @@ const OptionSelection = ({ options, handleOptionSelect, value}) => {
             <Pressable
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>{"Seleccionar..."}</Text>
+                <Text style={styles.textStyle}>{value || "Seleccionar..."}</Text>
             </Pressable>
         </View>
     )

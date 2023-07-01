@@ -13,13 +13,15 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 22,
+        marginVertical: 220,
     },
     modalView: {
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding: 35,
+        paddingHorizontal: 35,
+        paddingTop: 20,
+        paddingBottom: 50,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -50,4 +52,7 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
     },
+    optionContainer: {
+        margin: 15,
+    }
 });
