@@ -11,6 +11,7 @@ import { editCategoryTitleCloud } from "../../store/cloud/categoryStoreCloud";
 import { deleteCategoryCloud } from "../../store/cloud/categoryStoreCloud";
 import { deleteAllProductsFromCategorySQL } from "../../store/sqlite/productsSqlite";
 import { deleteFile } from "../../store/fileStore";
+import { deleteCategorySQL, editCategoryTitleSQL } from "../../store/sqlite/categorySqlite";
 
 const EditCategoryScreen = ({ navigation, route }) => {
     
@@ -28,7 +29,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
                 id: route.params.item.id,
                 newTitle: categoryTitle
             }
-            editCategoryTitleCloud(payload)
+            persistence === "local" ? editCategoryTitleSQL(payload) : editCategoryTitleCloud(payload)
             dispatch(editCategoryTitle(payload))
             setCategoryTitle("")
             Alert.alert("Categoría Modificada", "", [
@@ -48,7 +49,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
             {
                 text: "Sí",
                 onPress: async () => {
-                    deleteCategoryCloud(payload.id)
+                    persistence === "local" ? deleteCategorySQL(payload.id) : deleteCategoryCloud(payload.id)
                     dispatch(deleteCategory(payload))
                     const productsFiltered = products.filter(product => product.category === route.params.item.id)
                     for (let i=0; i < productsFiltered.length; i++) {

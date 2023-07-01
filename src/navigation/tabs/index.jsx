@@ -13,6 +13,7 @@ import { selectProducts } from '../../store/sqlite/productsSqlite';
 import { getPersistence } from '../../store/fileStore';
 import { changePersistence } from '../../store/reducers/persistenceSlice';
 import { selectCart } from '../../store/sqlite/cartSqlite';
+import { selectCategories } from '../../store/sqlite/categorySqlite';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,7 @@ const MyTabs = () => {
             const products = persistenceData === "local" ? await selectProducts() : await getAllProductsCloud()
             dispatch(getProducts(products))
 
-            const categories = await getAllCategoriesCloud()
+            const categories = persistence === "local" ? await selectCategories() : await getAllCategoriesCloud()
             dispatch(getCategories(categories))
 
             const cart = persistence === "local" ? await selectCart() : await getCartCloud()

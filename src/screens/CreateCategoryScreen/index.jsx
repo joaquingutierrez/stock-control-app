@@ -1,15 +1,17 @@
 import { View, Button, Alert } from "react-native";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./style"
 import { LabelAndInput } from "../../components";
 import { addCategory } from "../../store/reducers/categotySlice";
 import { addCategoryCloud } from "../../store/cloud/categoryStoreCloud";
+import { insertCategory } from "../../store/sqlite/categorySqlite";
 
 const CreateCategoryScreen = () => {
 
     const [categoryTitle, setCategoryTitle] = useState("")
+    const persistence = useSelector(state => state.persistence.data)
     const dispatch = useDispatch()
 
     const onHandleInput = (e) => {
@@ -17,7 +19,7 @@ const CreateCategoryScreen = () => {
     }
     const handleNewCategory = async () => {
         if (categoryTitle) {
-            const categoryId = await addCategoryCloud(categoryTitle)
+            const categoryId = persistence === "local" ? await insertCategory(categoryTitle) : await addCategoryCloud(categoryTitle)
             dispatch(addCategory({title: categoryTitle, id: categoryId}))
             setCategoryTitle("")
             Alert.alert("Categoría agregada", "", [
