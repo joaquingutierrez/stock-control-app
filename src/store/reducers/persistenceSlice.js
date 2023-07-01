@@ -9,11 +9,10 @@ export const persistenceSlice = createSlice({
     initialState,
     reducers: {
         changePersistence: (state, action) => {
-            const persistence = action.payload
-            switch (persistence) {
-                case "local": state.data = "cloud"
+            switch (action.payload) {
+                case "local": state.data = "local"
                     break
-                case "cloud": state.data = "local"
+                case "cloud": state.data = "cloud"
                     break
                 default: state.data = "local"
             }

@@ -8,6 +8,7 @@ import CustomText from "../../components/CustomText";
 import { addProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import { addProductCloud } from "../../store/cloud/productsStoreCloud";
+import { insertProduct } from "../../store/sqlite/productsSqlite";
 
 const CreateProductScreen = () => {
 
@@ -18,8 +19,8 @@ const CreateProductScreen = () => {
     const [min, setMin] = useState(0)
     const [stock, setStock] = useState(0)
     const dispatch = useDispatch()
-    const categories = useSelector(status => status.category.data)
-
+    const categories = useSelector(state => state.category.data)
+    const persistence = useSelector(state => state.persistence.data)
 
     const onHandleTitle = (e) => {
         setTitle(e)
@@ -64,7 +65,8 @@ const CreateProductScreen = () => {
             stock: stock,
             image: image
         }
-        const dataId = await addProductCloud(product)
+        const dataId = persistence === "local" ? await insertProduct(product) : await addProductCloud(product)
+        console.log(dataId)
         product.id = dataId
         dispatch(addProduct(product))
         setTitle("")

@@ -6,7 +6,7 @@ export const init = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                "CREATE TABLE IF NOT EXISTS products (id TEXT PRIMARY KEY NOT NULL, title TEXT NOT NULL, description TEXT NOT NULL, category TEXT NOT NULL, image TEXT NOT NULL, minimum NUMBER NOT NULL, stock NUMBER NOT NULL)",
+                "CREATE TABLE IF NOT EXISTS products (id TEXT PRIMARY KEY NOT NULL, title TEXT NOT NULL, description TEXT, category TEXT, image TEXT, minimum NUMBER, stock NUMBER)",
                 [],
                 () => {
                     resolve()
@@ -20,11 +20,13 @@ export const init = () => {
     return promise
 }
 
-export const insertProduct = (product) => {
+export const insertProduct = (product, productId) => {
+    console.log(product)
+    product.id = productId || Date.now().toString()
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                "INSERT INTO products (id, title, description, category, image, minimum, stock) VALUES (?,?,?,?,?,?,?))",
+                "INSERT INTO products (id, title, description, category, image, minimum, stock) VALUES (?,?,?,?,?,?,?)",
                 [product.id, product.title, product.description, product.category, product.image, product.minimum, product.stock],
                 (_, result) => {
                     resolve(result)

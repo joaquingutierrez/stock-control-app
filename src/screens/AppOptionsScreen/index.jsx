@@ -24,8 +24,9 @@ const AppOptionsScreen = () => {
         } else {
             persistenceData= "local"
         }
+        console.log("EEEEEEEEEEEEEE",persistenceData)
         savePersistence(persistenceData)
-        dispatch(changePersistence(persistence))
+        dispatch(changePersistence(persistenceData))
         setIsEnabled(previousState => !previousState)
     };
 

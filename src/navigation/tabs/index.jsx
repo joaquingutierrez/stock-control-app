@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { CreateNavigation, InventoryNavigation, CartNavigation } from '../index';
@@ -9,18 +9,25 @@ import { getAllCategoriesCloud } from '../../store/cloud/categoryStoreCloud';
 import { getCategories } from '../../store/reducers/categotySlice';
 import { getCartCloud } from '../../store/cloud/cartStoreCloud';
 import { getCart } from '../../store/reducers/cartSlice';
+import { selectProducts } from '../../store/sqlite/productsSqlite';
+import { getPersistence } from '../../store/fileStore';
+import { changePersistence } from '../../store/reducers/persistenceSlice';
 
 const Tab = createBottomTabNavigator();
 
 
 const MyTabs = () => {
 
+    const persistence = useSelector(state => state.persistence.data)
     const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchData = async () => {
-            const products = await getAllProductsCloud()
-            dispatch(getProducts(products))
+            let persistenceData = await getPersistence()
+            persistenceData = JSON.parse(persistenceData).persistence
+            dispatch(changePersistence(persistenceData))
+            const products = persistenceData === "local" ? await selectProducts() : await getAllProductsCloud()
+            dispatch(getProducts(products.rows._array))
 
             const categories = await getAllCategoriesCloud()
             dispatch(getCategories(categories))
@@ -29,7 +36,7 @@ const MyTabs = () => {
             dispatch(getCart(cart))
         }
         fetchData()
-    }, [])
+    }, [persistence])
 
 
     return (
