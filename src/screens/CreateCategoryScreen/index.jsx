@@ -18,7 +18,7 @@ const CreateCategoryScreen = () => {
         setCategoryTitle(e)
     }
     const handleNewCategory = async () => {
-        if (categoryTitle) {
+        if (categoryTitle.length<3) return Alert.alert("Error al crear la categoría", "Por favor, introduzca un Título de al menos 3 letras", [{text: "Aceptar"}])
             const categoryId = persistence === "local" ? await insertCategory(categoryTitle) : await addCategoryCloud(categoryTitle)
             dispatch(addCategory({title: categoryTitle, id: categoryId}))
             setCategoryTitle("")
@@ -27,7 +27,6 @@ const CreateCategoryScreen = () => {
                     text: "Aceptar"
                 }
             ])
-        } 
     }
 
     return (

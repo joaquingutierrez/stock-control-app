@@ -1,4 +1,4 @@
-import { View, Button, Alert, Keyboard, KeyboardAvoidingView } from "react-native";
+import { View, Button, Alert, KeyboardAvoidingView } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -55,6 +55,7 @@ const CreateProductScreen = () => {
     }
 
     const handleNewProduct = async () => {
+        if (title.length<3) return Alert.alert("Error al crear el producto", "Por favor, introduzca un Título de al menos 3 letras", [{text: "Aceptar"}])
         const product = {
             title: title,
             description: description,

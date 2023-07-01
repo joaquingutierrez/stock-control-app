@@ -14,31 +14,30 @@ import { deleteFile } from "../../store/fileStore";
 import { deleteCategorySQL, editCategoryTitleSQL } from "../../store/sqlite/categorySqlite";
 
 const EditCategoryScreen = ({ navigation, route }) => {
-    
+
     const [categoryTitle, setCategoryTitle] = useState("")
     const dispatch = useDispatch()
     const products = useSelector(state => state.product.data)
     const persistence = useSelector(state => state.persistence.data)
-    
+
     const onHandleInput = (e) => {
         setCategoryTitle(e)
     }
     const handleEditCategory = (item) => {
-        if (categoryTitle) {
-            const payload = {
-                id: route.params.item.id,
-                newTitle: categoryTitle
-            }
-            persistence === "local" ? editCategoryTitleSQL(payload) : editCategoryTitleCloud(payload)
-            dispatch(editCategoryTitle(payload))
-            setCategoryTitle("")
-            Alert.alert("Categoría Modificada", "", [
-                {
-                    text: "Aceptar",
-                    onPress: () => navigation.navigate("Categories")
-                }
-            ])
+        if (categoryTitle.length < 3) return Alert.alert("Error al editar la categoría", "Por favor, introduzca un Título de al menos 3 letras", [{ text: "Aceptar" }])
+        const payload = {
+            id: route.params.item.id,
+            newTitle: categoryTitle
         }
+        persistence === "local" ? editCategoryTitleSQL(payload) : editCategoryTitleCloud(payload)
+        dispatch(editCategoryTitle(payload))
+        setCategoryTitle("")
+        Alert.alert("Categoría Modificada", "", [
+            {
+                text: "Aceptar",
+                onPress: () => navigation.navigate("Categories")
+            }
+        ])
     }
     const handleDeleteCategory = (item) => {
         const payload = {
@@ -52,7 +51,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
                     persistence === "local" ? deleteCategorySQL(payload.id) : deleteCategoryCloud(payload.id)
                     dispatch(deleteCategory(payload))
                     const productsFiltered = products.filter(product => product.category === route.params.item.id)
-                    for (let i=0; i < productsFiltered.length; i++) {
+                    for (let i = 0; i < productsFiltered.length; i++) {
                         await deleteFile(productsFiltered[i].image)
                     }
                     persistence === "local" ? await deleteAllProductsFromCategorySQL(route.params.item.id) : await deleteAllProductsFromCategoryCloud(productsFiltered)

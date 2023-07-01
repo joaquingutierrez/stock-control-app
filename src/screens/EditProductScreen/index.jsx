@@ -65,6 +65,7 @@ const EditProductScreen = ({ navigation, route }) => {
     }
 
     const handleEditProduct = async () => {
+        if (title.length < 3) return Alert.alert("Error al editar el producto", "Por favor, introduzca un Título de al menos 3 letras", [{ text: "Aceptar" }])
         const product = {
             title: title,
             description: description,
