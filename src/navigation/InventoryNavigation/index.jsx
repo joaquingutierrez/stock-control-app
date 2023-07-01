@@ -38,9 +38,9 @@ const InventoryNavigation = () => {
                 })}
             />
             <Stack.Screen name="AppOptions" component={AppOptionsScreen}
-            options={{
-                title: "Opciones"
-            }}
+                options={{
+                    title: "Opciones"
+                }}
             />
         </Stack.Navigator>
     );

@@ -116,20 +116,23 @@ const EditProductScreen = ({ navigation, route }) => {
                         handleStockAdd={handleStockAdd}
                         title={title}
                         description={description}
-                        category={category}
+                        category={categories.find(item => item.id === category)}
                         min={min}
                         stock={stock}
                         categories={categories}
                         image={image}
                     />
-                    <Button
-                        title="Modificar Producto"
-                        onPress={handleEditProduct}
-                    />
-                    <Button
-                        title="Borrar Producto"
-                        onPress={handleDeleteProduct}
-                    />
+                    <View style={styles.buttonsContainer}>
+                        <Button
+                            title="Modificar Producto"
+                            onPress={handleEditProduct}
+                        />
+                        <Button
+                            title="Borrar Producto"
+                            onPress={handleDeleteProduct}
+                            color="red"
+                        />
+                    </View>
                 </>
             ) : (
                 <CustomText myCustomText="Producto no econtrado" />

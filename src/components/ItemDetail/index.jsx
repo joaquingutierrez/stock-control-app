@@ -16,6 +16,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
 
     const dispatch = useDispatch()
     const persistence = useSelector(state => state.persistence.data)
+    const categories = useSelector(state => state.category.data)
 
     const [number, setNumber] = useState(item.stock)
 
@@ -50,24 +51,34 @@ const ItemDetail = ({ item, handleAddToCart }) => {
                 {item.image ? <Image style={styles.image} source={{ uri: item.image }} /> : <CustomText myCustomText="Sin imagen" />}
             </View>
             <CustomText myCustomText={item.title} textType="title" />
-            <CustomText myCustomText={item.description} />
-            <CustomText myCustomText={item.category} />
+            <View>
+                <CustomText myCustomText="Descripción: " />
+                <CustomText myCustomText={item.description || "Sin Descripción"} />
+            </View>
+            <View>
+                <CustomText myCustomText="Categoría: " />
+                <CustomText myCustomText={item.category ? categories.find(category => category.id === item.category).title : "Sin categoría"} />
+            </View>
             <View style={styles.horizontal}>
                 <CustomText myCustomText="Mínimo: " />
                 <CustomText myCustomText={item.minimum} />
             </View>
-            <View style={styles.horizontal}>
-                <CustomText myCustomText="Stock: " />
-                <CustomText myCustomText={item.stock} />
-                <ButtonAndInput
-                    number={number}
-                    title="Actualizar"
-                    handleNumberAdd={handleNumberAdd}
-                    handleNumberSubstract={handleNumberSubstract}
-                    handleOnpress={handleOnpress}
-                />
+            <View style={styles.stockContainer}>
+                <View style={styles.horizontal}>
+                    <CustomText myCustomText="Stock: " />
+                    <CustomText myCustomText={item.stock} />
+                    </View>
+                    <ButtonAndInput
+                        number={number}
+                        title="Actualizar"
+                        handleNumberAdd={handleNumberAdd}
+                        handleNumberSubstract={handleNumberSubstract}
+                        handleOnpress={handleOnpress}
+                    />
             </View>
+            <View style={styles.buttonContainer}>
             <Button title="Agregar al carrito" onPress={handleAddToCart} />
+            </View>
         </View>
     )
 }

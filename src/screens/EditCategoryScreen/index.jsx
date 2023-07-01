@@ -82,6 +82,7 @@ const EditCategoryScreen = ({ navigation, route }) => {
             <Button
                 title="Borrar Categoría"
                 onPress={() => handleDeleteCategory()}
+                color="red"
             />
         </View>
     )

@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Button } from "react-native";
 import { useSelector } from "react-redux";
 
 import { styles } from "./style"
@@ -23,11 +23,18 @@ const ProductsScreen = ({ navigation, route }) => {
         });
     }
 
+    const renderItem = ({ item }) => (
+        <View style={styles.itemContainer}>
+            <ItemTouchable red={item.stock < item.minimum} title={item.title} textWhite={false} onSelected={() => onSelected(item)} />
+        </View>
+    )
+
+
     return (
         <View style={styles.container}>
-            <FlatList style={styles.containerList}
+            <FlatList
                 data={productsFiltered}
-                renderItem={({ item }) => <ItemTouchable red={item.stock < item.minimum} title={item.title} textWhite={false} onSelected={() => onSelected(item)} />}
+                renderItem={renderItem}
                 keyExtractor={item => item.id}
             />
         </View>
