@@ -2,7 +2,6 @@ import { View, FlatList } from "react-native";
 
 import { styles } from "./style"
 import { ItemTouchable } from "../../components"
-import { products } from "../../constants/data/products"
 
 const CartScreen = ({navigation}) => {
 

@@ -24,7 +24,6 @@ const AppOptionsScreen = () => {
         } else {
             persistenceData= "local"
         }
-        console.log("EEEEEEEEEEEEEE",persistenceData)
         savePersistence(persistenceData)
         dispatch(changePersistence(persistenceData))
         setIsEnabled(previousState => !previousState)
@@ -53,7 +52,7 @@ const AppOptionsScreen = () => {
                 persistenceData = await savePersistence(persistence)
                 persistenceData = await getPersistence()
                 persistenceData = JSON.parse(persistenceData)
-                setIsEnabled(persistenceData !== "local")
+                setIsEnabled(false)
             }
         }
         catch (err) {

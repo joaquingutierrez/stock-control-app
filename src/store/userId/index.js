@@ -16,6 +16,8 @@ export const createUserId = async () => {
 export const readUserId = async () => {
     const path = FileSystem.documentDirectory + "UserId.json"
     try {
+        const isUserIdExists = await FileSystem.getInfoAsync(path)
+        if (!isUserIdExists.exists) return
         const userId = await FileSystem.readAsStringAsync(path);
         console.log('User ID obtenida con éxito.');
         return userId

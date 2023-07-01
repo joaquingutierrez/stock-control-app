@@ -1,11 +1,15 @@
 import * as FileSystem from "expo-file-system"
 
 export const deleteFile = async (fileUri) => {
-    try {
-        await FileSystem.deleteAsync(fileUri);
-        console.log('Archivo borrado correctamente.');
-    } catch (error) {
-        console.error('Error al borrar el archivo:', error);
+    if (fileUri) {
+        try {
+            const isImageExists = await FileSystem.getInfoAsync(path)
+            if (!isImageExists.exists) return
+            await FileSystem.deleteAsync(fileUri);
+            console.log('Archivo borrado correctamente.');
+        } catch (error) {
+            console.error('Error al borrar el archivo:', error);
+        }
     }
 };
 
@@ -24,6 +28,8 @@ export const moveFile = async (fromUri, TofileUri) => {
 export const getPersistence = async () => {
     const path = FileSystem.documentDirectory + "persistence.json"
     try {
+        const isPersistenceExists = await FileSystem.getInfoAsync(path)
+        if (!isPersistenceExists.exists) return
         const persistence = await FileSystem.readAsStringAsync(path)
         console.log("Persistencia obtenida con exito")
         return persistence

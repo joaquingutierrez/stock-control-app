@@ -26,8 +26,10 @@ const MyTabs = () => {
     useEffect(() => {
         const fetchData = async () => {
             let persistenceData = await getPersistence()
-            persistenceData = JSON.parse(persistenceData).persistence
-            dispatch(changePersistence(persistenceData))
+            if (persistenceData) {
+                persistenceData = JSON.parse(persistenceData).persistence
+                dispatch(changePersistence(persistenceData))
+            }
             const products = persistenceData === "local" ? await selectProducts() : await getAllProductsCloud()
             dispatch(getProducts(products))
 
