@@ -9,6 +9,7 @@ import { CreateProduct } from "../../componentContainer";
 import CustomText from "../../components/CustomText";
 import { deleteProductCloud, editProductCloud } from "../../store/cloud/productsStoreCloud";
 import { moveFile, deleteFile } from "../../store/fileStore";
+import { editProductByIdSQL } from "../../store/sqlite/productsSqlite";
 
 const EditProductScreen = ({ navigation, route }) => {
 
@@ -16,6 +17,7 @@ const EditProductScreen = ({ navigation, route }) => {
     const products = useSelector(status => status.product.data)
     const dispatch = useDispatch()
     const product = products.find(product => product.id === route.params.id) || ""
+    const persistence = useSelector(state => state.persistence.data)
 
     const [title, setTitle] = useState(product.title)
     const [description, setDescription] = useState(product.description)
@@ -72,7 +74,7 @@ const EditProductScreen = ({ navigation, route }) => {
             image: image,
             id: route.params.id
         }
-        editProductCloud(product)
+        persistence === "local" ? await editProductByIdSQL(product) : await editProductCloud(product)
         dispatch(editProduct(product))
         Alert.alert("Producto modificado", "", [
             {

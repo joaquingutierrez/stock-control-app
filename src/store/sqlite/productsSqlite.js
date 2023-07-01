@@ -57,3 +57,23 @@ export const selectProducts = () => {
     })
     return promise
 }
+
+export const editProductByIdSQL = (product) => {
+    const { id, title, description, category, image, minimum, stock } = product
+    const promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                "UPDATE products SET title = ?, description = ?, category = ?, image = ?, minimum = ?, stock = ? WHERE id = ?",
+                [title, description, category, image, minimum, stock, id],
+                (_, result) => {
+                    console.log("Fdf")
+                    resolve(result)
+                },
+                (_, err) => {
+                    reject(err)
+                }
+            )
+        })
+    })
+    return promise
+}
