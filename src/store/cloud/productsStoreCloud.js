@@ -1,9 +1,9 @@
 import { URL_API } from "../../constants/data/dataBase"
-
-const userID = "ID_DEL_USUARIO"
+import { readUserId } from "../userId"
 
 export const getAllProductsCloud = async () => {
     try {
+        const userID = await readUserId()
         const response = await fetch(`${URL_API}/${userID}/products.json`)
         const data = await response.json()
         if (!data) return
@@ -21,6 +21,7 @@ export const getAllProductsCloud = async () => {
 
 export const addProductCloud = async (newProduct) => {
     try {
+        const userID = await readUserId()
         const response = await fetch(`${URL_API}/${userID}/products.json`, {
             method: "POST",
             headers: {
@@ -38,6 +39,7 @@ export const addProductCloud = async (newProduct) => {
 
 export const editProductCloud = async (productUpdate) => {
     try {
+        const userID = await readUserId()
         const productId = productUpdate.id
         const sendProduct = {
             title: productUpdate.title,
@@ -62,6 +64,7 @@ export const editProductCloud = async (productUpdate) => {
 
 export const deleteProductCloud = async (productId) => {
     try {
+        const userID = await readUserId()
         await fetch(`${URL_API}/${userID}/products/${productId}.json`, {
             method: "DELETE",
         })
@@ -73,6 +76,7 @@ export const deleteProductCloud = async (productId) => {
 
 export const deleteAllProductsFromCategoryCloud = async (products) => {
     try {
+        const userID = await readUserId()
         for (let i=0; i<products.length; i++) {
             await fetch(`${URL_API}/${userID}/products/${products[i].id}.json`, {
                 method: "DELETE",
@@ -86,6 +90,7 @@ export const deleteAllProductsFromCategoryCloud = async (products) => {
 
 export const updateStockCloud = async (productId, newStock) => {
     try {
+        const userID = await readUserId()
         const sendUpdate = {
             stock: newStock
         }
@@ -104,6 +109,7 @@ export const updateStockCloud = async (productId, newStock) => {
 
 export const updateStockAfterPurchaseCloud = async (cart) => {
     try {
+        const userID = await readUserId()
         const products = await getAllProductsCloud()
         for (let i = 0; i < cart.length; i++) {
             const product = products.find(product => product.id === cart[i].id)

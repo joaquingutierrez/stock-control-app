@@ -1,9 +1,9 @@
 import { URL_API } from "../../constants/data/dataBase"
-
-const userID = "ID_DEL_USUARIO"
+import { readUserId } from "../userId"
 
 export const getAllCategoriesCloud = async () => {
     try {
+        const userID = await readUserId()
         const response = await fetch(`${URL_API}/${userID}/categories.json`)
         const data = await response.json()
         if (!data) return
@@ -21,6 +21,7 @@ export const getAllCategoriesCloud = async () => {
 
 export const addCategoryCloud = async (category) => {
     try {
+        const userID = await readUserId()
         const response = await fetch(`${URL_API}/${userID}/categories.json`, {
             method: "POST",
             headers: {
@@ -38,6 +39,7 @@ export const addCategoryCloud = async (category) => {
 
 export const editCategoryTitleCloud = async (payload) => {
     try {
+        const userID = await readUserId()
         const newTitle = payload.newTitle
         const categoryId = payload.id
         console.log(newTitle, categoryId)
@@ -59,6 +61,7 @@ export const editCategoryTitleCloud = async (payload) => {
 
 export const deleteCategoryCloud = async (categoryId) => {
     try {
+        const userID = await readUserId()
         await fetch(`${URL_API}/${userID}/categories/${categoryId}.json`, {
             method: "DELETE",
         })

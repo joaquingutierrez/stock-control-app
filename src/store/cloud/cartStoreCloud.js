@@ -1,9 +1,9 @@
 import { URL_API } from "../../constants/data/dataBase"
-
-const userID = "ID_DEL_USUARIO"
+import { readUserId } from "../userId"
 
 export const getCartCloud = async () => {
     try {
+        const userID = await readUserId()
         const response = await fetch(`${URL_API}/${userID}/cart.json`)
         const data = await response.json()
         if (!data) return
@@ -21,6 +21,7 @@ export const getCartCloud = async () => {
 
 export const addToCartCloud = async (payload) => {
     try {
+        const userID = await readUserId()
         const { item, quantity } = payload
         const sendItem = {
             title: item.title,
@@ -44,6 +45,7 @@ export const addToCartCloud = async (payload) => {
 
 export const completePurchaseCloud = async () => {
     try {
+        const userID = await readUserId()
         const response = await fetch(`${URL_API}/${userID}/cart.json`, {
             method: "DELETE",
         })
