@@ -23,6 +23,8 @@ export const addToCartCloud = async (payload) => {
     try {
         const { item, quantity } = payload
         const sendItem = {
+            title: item.title,
+            category: item.category,
             quantity: quantity
         }
         const response = await fetch(`${URL_API}/${userID}/cart/${item.id}.json`, {

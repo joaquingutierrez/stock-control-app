@@ -10,6 +10,7 @@ import { addToCart } from "../../store/reducers/cartSlice"
 import { updateStockCloud } from "../../store/cloud/productsStoreCloud"
 import { addToCartCloud } from "../../store/cloud/cartStoreCloud"
 import { updateStockSQL } from "../../store/sqlite/productsSqlite"
+import { insertProductToCartSQL } from "../../store/sqlite/cartSqlite"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
@@ -38,7 +39,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
                 item: item,
                 quantity: item.minimum - newStock
             }
-            addToCartCloud(payload)
+            persistence === "local" ? insertProductToCartSQL(payload) : addToCartCloud(payload)
             dispatch(addToCart(payload))
         }
     }

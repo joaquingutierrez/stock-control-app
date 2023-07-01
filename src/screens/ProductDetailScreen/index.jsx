@@ -7,11 +7,13 @@ import { InputNumber, ItemDetail } from "../../components";
 import CustomText from "../../components/CustomText";
 import { addToCart } from "../../store/reducers/cartSlice";
 import { addToCartCloud } from "../../store/cloud/cartStoreCloud";
+import { insertProductToCartSQL } from "../../store/sqlite/cartSqlite";
 
 const ProductDetailScreen = ({ route }) => {
 
     const dispatch = useDispatch()
     const products = useSelector(state => state.product.data)
+    const persistence = useSelector(state => state.persistence.data)
     const [modalVisible, setModalVisible] = useState(false);
     const [number, setNumber] = useState(0)
 
@@ -25,7 +27,8 @@ const ProductDetailScreen = ({ route }) => {
             item: product,
             quantity: number
         }
-        addToCartCloud(payload)
+        
+        persistence === "local" ? insertProductToCartSQL(payload) : addToCartCloud(payload)
         dispatch(addToCart(payload))
         setModalVisible(false)
     }

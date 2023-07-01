@@ -2,7 +2,7 @@ import * as SQLite from "expo-sqlite"
 
 const db = SQLite.openDatabase("products.db")
 
-export const init = () => {
+export const initProducts = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
@@ -47,7 +47,7 @@ export const selectProducts = () => {
                 "SELECT * FROM products",
                 [],
                 (_, result) => {
-                    resolve(result)
+                    resolve(result.rows._array)
                 },
                 (_, err) => {
                     reject(err)
