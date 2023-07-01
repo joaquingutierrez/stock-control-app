@@ -7,10 +7,12 @@ import { completePurchase } from "../../store/reducers/cartSlice";
 import { updateStockAfterPurchase } from "../../store/reducers/productSlice";
 import { updateStockAfterPurchaseCloud } from "../../store/cloud/productsStoreCloud";
 import { completePurchaseCloud } from "../../store/cloud/cartStoreCloud";
+import { selectProductByIdFromSQL, updateStockSQL } from "../../store/sqlite/productsSqlite";
 
 const ProductsCartScreen = ({ navigation, route }) => {
 
     const productsCart = useSelector(state => state.cart.data)
+    const persistence = useSelector(state => state.persistence.data)
     const dispatch = useDispatch()
 
     const categoryId = route.params.id.toString()
@@ -20,12 +22,12 @@ const ProductsCartScreen = ({ navigation, route }) => {
     } else {
         productsCartFiltered = productsCart
     }
-    
+
     const createCart = []
     const quantity = (id, quantity) => {
         const product = createCart.find(product => product.id === id)
         if (!product) {
-            return createCart.push({id, quantity})
+            return createCart.push({ id, quantity })
         }
         product.quantity = quantity
     }
@@ -43,8 +45,16 @@ const ProductsCartScreen = ({ navigation, route }) => {
         )
     }
 
-    const handleOnPress = () => {
-        updateStockAfterPurchaseCloud(createCart)
+    const handleOnPress = async () => {
+        if (persistence === "local") {
+            for (let i = 0; i < createCart.length; i++) {
+                const product = await selectProductByIdFromSQL(createCart[i].id)
+                const newStock = product.stock + createCart[i].quantity
+                updateStockSQL(createCart[i].id, newStock)
+            }
+        } else {
+            updateStockAfterPurchaseCloud(createCart)
+        }
         dispatch(updateStockAfterPurchase(createCart))
         completePurchaseCloud()
         dispatch(completePurchase())

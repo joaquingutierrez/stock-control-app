@@ -9,7 +9,7 @@ import { CreateProduct } from "../../componentContainer";
 import CustomText from "../../components/CustomText";
 import { deleteProductCloud, editProductCloud } from "../../store/cloud/productsStoreCloud";
 import { moveFile, deleteFile } from "../../store/fileStore";
-import { editProductByIdSQL } from "../../store/sqlite/productsSqlite";
+import { deleteProductByIdSQL, editProductByIdSQL } from "../../store/sqlite/productsSqlite";
 
 const EditProductScreen = ({ navigation, route }) => {
 
@@ -88,8 +88,9 @@ const EditProductScreen = ({ navigation, route }) => {
         Alert.alert("Borrar producto", "¿Está seguro?", [
             {
                 text: "Sí",
-                onPress: () => {
-                    deleteProductCloud(product.id)
+                onPress: async () => {
+                    await deleteFile(product.image)
+                    persistence === "local" ? await deleteProductByIdSQL(product.id) : await deleteProductCloud(product.id)
                     dispatch(deleteProduct(product))
                     navigation.navigate("Categories");
                 }

@@ -1,6 +1,6 @@
 import { View, Image, Button } from "react-native"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { styles } from "./style"
 import CustomText from "../CustomText"
@@ -9,10 +9,12 @@ import { updateStock } from "../../store/reducers/productSlice"
 import { addToCart } from "../../store/reducers/cartSlice"
 import { updateStockCloud } from "../../store/cloud/productsStoreCloud"
 import { addToCartCloud } from "../../store/cloud/cartStoreCloud"
+import { updateStockSQL } from "../../store/sqlite/productsSqlite"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
     const dispatch = useDispatch()
+    const persistence = useSelector(state => state.persistence.data)
 
     const [number, setNumber] = useState(item.stock)
 
@@ -29,7 +31,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
             id: productId,
             newStock: newStock
         }
-        updateStockCloud(productId, newStock)
+        persistence === "local" ? updateStockSQL(productId, newStock) : updateStockCloud(productId, newStock)
         dispatch(updateStock(payload))
         if (newStock < item.minimum) {
             const payload = {

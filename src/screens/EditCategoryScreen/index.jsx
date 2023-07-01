@@ -9,12 +9,15 @@ import { deleteAllProductsFromCategory } from "../../store/reducers/productSlice
 import { deleteAllProductsFromCategoryCloud } from "../../store/cloud/productsStoreCloud";
 import { editCategoryTitleCloud } from "../../store/cloud/categoryStoreCloud";
 import { deleteCategoryCloud } from "../../store/cloud/categoryStoreCloud";
+import { deleteAllProductsFromCategorySQL } from "../../store/sqlite/productsSqlite";
+import { deleteFile } from "../../store/fileStore";
 
 const EditCategoryScreen = ({ navigation, route }) => {
     
     const [categoryTitle, setCategoryTitle] = useState("")
     const dispatch = useDispatch()
     const products = useSelector(state => state.product.data)
+    const persistence = useSelector(state => state.persistence.data)
     
     const onHandleInput = (e) => {
         setCategoryTitle(e)
@@ -44,11 +47,14 @@ const EditCategoryScreen = ({ navigation, route }) => {
         Alert.alert("Borrar Categoría", "Esta acción tambien borrará los productos que pertenezcan a la misma. ¿Desea continuar?", [
             {
                 text: "Sí",
-                onPress: () => {
+                onPress: async () => {
                     deleteCategoryCloud(payload.id)
                     dispatch(deleteCategory(payload))
                     const productsFiltered = products.filter(product => product.category === route.params.item.id)
-                    deleteAllProductsFromCategoryCloud(productsFiltered)
+                    for (let i=0; i < productsFiltered.length; i++) {
+                        await deleteFile(productsFiltered[i].image)
+                    }
+                    persistence === "local" ? await deleteAllProductsFromCategorySQL(route.params.item.id) : await deleteAllProductsFromCategoryCloud(productsFiltered)
                     dispatch(deleteAllProductsFromCategory(payload))
                     navigation.navigate("Categories")
                 }
