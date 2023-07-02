@@ -22,7 +22,6 @@ export const initProducts = () => {
 
 export const insertProduct = (product, productId = Date.now().toString()) => {
     product.id = productId
-    console.log(product)
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(

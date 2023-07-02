@@ -38,6 +38,7 @@ const CreateProductScreen = () => {
 
 
     const handleMinSubstract = () => {
+        if (min === 0 ) return
         const update = min - 1
         setMin(update)
     }
@@ -47,6 +48,7 @@ const CreateProductScreen = () => {
     }
 
     const handleStockSubstract = () => {
+        if (stock === 0 ) return
         const update = stock - 1
         setStock(update)
     }

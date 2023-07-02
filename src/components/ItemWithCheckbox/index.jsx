@@ -18,6 +18,7 @@ const ItemWithCheckbox = ({ id, title, minQuantity, quantity }) => {
         quantity(id, updatedNumber)
     }
     const handleNumberSubstract = () => {
+        if (number === 0) return
         const updatedNumber = number - 1
         setNumber(updatedNumber)
         quantity(updatedNumber)

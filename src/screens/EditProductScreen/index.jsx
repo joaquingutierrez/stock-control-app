@@ -48,6 +48,7 @@ const EditProductScreen = ({ navigation, route }) => {
     }
 
     const handleMinSubstract = () => {
+        if (min === 0) return
         const update = min - 1
         setMin(update)
     }
@@ -57,6 +58,7 @@ const EditProductScreen = ({ navigation, route }) => {
     }
 
     const handleStockSubstract = () => {
+        if (stock === 0) return
         const update = stock - 1
         setStock(update)
     }

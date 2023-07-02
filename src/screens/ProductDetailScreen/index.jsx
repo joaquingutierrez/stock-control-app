@@ -28,13 +28,14 @@ const ProductDetailScreen = ({ route }) => {
             item: product,
             quantity: number
         }
-        
+
         persistence === "local" ? insertProductToCartSQL(payload) : addToCartCloud(payload)
         dispatch(addToCart(payload))
         setModalVisible(false)
     }
 
     const handleNumberSubstract = () => {
+        if (number === 0) return
         const updateNumber = number - 1
         setNumber(updateNumber)
     }

@@ -25,6 +25,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
         setNumber(number + 1)
     }
     const handleNumberSubstract = () => {
+        if (number === 0) return
         setNumber(number - 1)
     }
     const handleOnpress = () => {
