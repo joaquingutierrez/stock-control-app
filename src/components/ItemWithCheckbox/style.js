@@ -10,6 +10,12 @@ export const styles = StyleSheet.create({
         paddingVertical: 4,
         marginVertical: 10,
         justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        paddingLeft: 15,
+    },
+    textContainer: {
+        width: "50%",
     },
     shop: {
         backgroundColor: colors.tertiary,

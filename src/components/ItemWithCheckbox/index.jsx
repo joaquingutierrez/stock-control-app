@@ -25,7 +25,9 @@ const ItemWithCheckbox = ({ id, title, minQuantity, quantity }) => {
 
     return (
         <View style={[styles.container, number > 0 && number < minQuantity && styles.shop, number >= minQuantity && styles.reached]}>
-            <CustomText myCustomText={title} textType="title" textWhite={true} />
+            <View style={styles.textContainer}>
+                <CustomText myCustomText={title} textType="title" textWhite={true} />
+            </View>
             <InputNumber
                 number={number}
                 handleNumberSubstract={handleNumberSubstract}

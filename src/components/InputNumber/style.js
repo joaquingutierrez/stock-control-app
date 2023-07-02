@@ -5,7 +5,7 @@ import { colors } from "../../constants/theme"
 export const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        gap: 15,
+        gap: 10,
     },
     buttonContainer: {
         backgroundColor: colors.primary,
