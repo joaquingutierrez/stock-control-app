@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import { styles } from "./style"
 import { ItemTouchable } from "../../components"
+import { colors } from "../../constants/theme";
 
 const CategoriesScreen = ({ navigation }) => {
 
@@ -19,7 +20,7 @@ const CategoriesScreen = ({ navigation }) => {
         <View style={styles.itemContainer}>
             <ItemTouchable title={item.title} textWhite={false} onSelected={() => onSelected(item)} />
             <View style={styles.button}>
-                <Button title="Editar" onPress={() => navigation.navigate("CategoryEdit", { item })} />
+                <Button title="Editar" color={colors.ok} onPress={() => navigation.navigate("CategoryEdit", { item })} />
             </View>
         </View>
     )

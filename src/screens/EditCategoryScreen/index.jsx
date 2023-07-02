@@ -12,6 +12,7 @@ import { deleteCategoryCloud } from "../../store/cloud/categoryStoreCloud";
 import { deleteAllProductsFromCategorySQL } from "../../store/sqlite/productsSqlite";
 import { deleteFile } from "../../store/fileStore";
 import { deleteCategorySQL, editCategoryTitleSQL } from "../../store/sqlite/categorySqlite";
+import { colors } from "../../constants/theme";
 
 const EditCategoryScreen = ({ navigation, route }) => {
 
@@ -76,12 +77,13 @@ const EditCategoryScreen = ({ navigation, route }) => {
             />
             <Button
                 title="Modificar Categoría"
+                color={colors.ok}
                 onPress={() => handleEditCategory()}
             />
             <Button
                 title="Borrar Categoría"
                 onPress={() => handleDeleteCategory()}
-                color="red"
+                color={colors.danger}
             />
         </View>
     )

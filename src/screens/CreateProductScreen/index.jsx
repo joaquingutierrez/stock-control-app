@@ -7,6 +7,7 @@ import { addProduct } from "../../store/reducers/productSlice";
 import { CreateProduct } from "../../componentContainer";
 import { addProductCloud } from "../../store/cloud/productsStoreCloud";
 import { insertProduct } from "../../store/sqlite/productsSqlite";
+import { colors } from "../../constants/theme";
 
 const CreateProductScreen = () => {
 
@@ -108,6 +109,7 @@ const CreateProductScreen = () => {
             </KeyboardAvoidingView>
             <Button
                 title="Crear Producto"
+                color={colors.ok}
                 onPress={handleNewProduct}
             />
         </View>

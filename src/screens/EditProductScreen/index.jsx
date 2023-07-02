@@ -10,6 +10,7 @@ import CustomText from "../../components/CustomText";
 import { deleteProductCloud, editProductCloud } from "../../store/cloud/productsStoreCloud";
 import { moveFile, deleteFile } from "../../store/fileStore";
 import { deleteProductByIdSQL, editProductByIdSQL } from "../../store/sqlite/productsSqlite";
+import { colors } from "../../constants/theme";
 
 const EditProductScreen = ({ navigation, route }) => {
 
@@ -117,7 +118,7 @@ const EditProductScreen = ({ navigation, route }) => {
                         handleStockAdd={handleStockAdd}
                         title={title}
                         description={description}
-                        category={categories.find(item => item.id === category)}
+                        category={categories.find(item => item.id === category) || {title: "", id: ""}}
                         min={min}
                         stock={stock}
                         categories={categories}
@@ -126,12 +127,13 @@ const EditProductScreen = ({ navigation, route }) => {
                     <View style={styles.buttonsContainer}>
                         <Button
                             title="Modificar Producto"
+                            color={colors.ok}
                             onPress={handleEditProduct}
                         />
                         <Button
                             title="Borrar Producto"
+                            color={colors.danger}
                             onPress={handleDeleteProduct}
-                            color="red"
                         />
                     </View>
                 </>

@@ -8,6 +8,7 @@ import CustomText from "../../components/CustomText";
 import { addToCart } from "../../store/reducers/cartSlice";
 import { addToCartCloud } from "../../store/cloud/cartStoreCloud";
 import { insertProductToCartSQL } from "../../store/sqlite/cartSqlite";
+import { colors } from "../../constants/theme";
 
 const ProductDetailScreen = ({ route }) => {
 
@@ -60,8 +61,8 @@ const ProductDetailScreen = ({ route }) => {
                                 <Text style={styles.modalText}>Cantidad a agregar:</Text>
                                 <InputNumber number={number} handleNumberSubstract={handleNumberSubstract} handleNumberAdd={handleNumberAdd} />
                                 <View>
-                                    <Button title="Aceptar" onPress={dispatchAddToCart} />
-                                    <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+                                    <Button color={colors.ok} title="Aceptar" onPress={dispatchAddToCart} />
+                                    <Button color={colors.danger} title="Cancelar" onPress={() => setModalVisible(false)} />
                                 </View>
                             </View>
                         </View>

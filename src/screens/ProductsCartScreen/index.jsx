@@ -9,6 +9,7 @@ import { updateStockAfterPurchaseCloud } from "../../store/cloud/productsStoreCl
 import { completePurchaseCloud } from "../../store/cloud/cartStoreCloud";
 import { selectProductByIdFromSQL, updateStockSQL } from "../../store/sqlite/productsSqlite";
 import { deleteAfterPurchaseSQL } from "../../store/sqlite/cartSqlite";
+import { colors } from "../../constants/theme";
 
 const ProductsCartScreen = ({ navigation, route }) => {
 
@@ -70,6 +71,7 @@ const ProductsCartScreen = ({ navigation, route }) => {
             />
             <Button
                 title="Terminar compra"
+                color={colors.ok}
                 onPress={handleOnPress}
             />
         </View>

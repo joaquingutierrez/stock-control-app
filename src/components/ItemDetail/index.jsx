@@ -11,6 +11,7 @@ import { updateStockCloud } from "../../store/cloud/productsStoreCloud"
 import { addToCartCloud } from "../../store/cloud/cartStoreCloud"
 import { updateStockSQL } from "../../store/sqlite/productsSqlite"
 import { insertProductToCartSQL } from "../../store/sqlite/cartSqlite"
+import { colors } from "../../constants/theme"
 
 const ItemDetail = ({ item, handleAddToCart }) => {
 
@@ -77,7 +78,7 @@ const ItemDetail = ({ item, handleAddToCart }) => {
                     />
             </View>
             <View style={styles.buttonContainer}>
-            <Button title="Agregar al carrito" onPress={handleAddToCart} />
+            <Button title="Agregar al carrito" color={colors.ok} onPress={handleAddToCart} />
             </View>
         </View>
     )

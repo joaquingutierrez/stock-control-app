@@ -2,6 +2,7 @@ import { View, Button, Alert } from "react-native"
 import { requestCameraPermissionsAsync, launchCameraAsync } from "expo-image-picker"
 
 import { styles } from "./style"
+import { colors } from "../../constants/theme"
 
 const ImageSelector = ({ onImage }) => {
 
@@ -33,7 +34,7 @@ const ImageSelector = ({ onImage }) => {
 
     return (
         <View style={styles.container}>
-            <Button title="Tomar Foto" color="blue" onPress={onHandlerTakeImage} />
+            <Button title="Tomar Foto" color={colors.ok} onPress={onHandlerTakeImage} />
         </View>
     )
 }

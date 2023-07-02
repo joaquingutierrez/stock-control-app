@@ -7,6 +7,7 @@ import { LabelAndInput } from "../../components";
 import { addCategory } from "../../store/reducers/categotySlice";
 import { addCategoryCloud } from "../../store/cloud/categoryStoreCloud";
 import { insertCategory } from "../../store/sqlite/categorySqlite";
+import { colors } from "../../constants/theme";
 
 const CreateCategoryScreen = () => {
 
@@ -39,6 +40,7 @@ const CreateCategoryScreen = () => {
                 />
             <Button
                 title="Agregar Categoría"
+                color={colors.ok}
                 onPress={()=>handleNewCategory()}
             />
         </View>
