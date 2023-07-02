@@ -50,7 +50,6 @@ const ProductsCartScreen = ({ navigation, route }) => {
         if (persistence === "local") {
             for (let i = 0; i < createCart.length; i++) {
                 const product = await selectProductByIdFromSQL(createCart[i].id)
-                console.log("lista de productos:",product)
                 const newStock = product.stock + createCart[i].quantity
                 updateStockSQL(createCart[i].id, newStock)
             }

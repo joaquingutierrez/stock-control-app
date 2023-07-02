@@ -42,7 +42,6 @@ export const editCategoryTitleCloud = async (payload) => {
         const userID = await readUserId()
         const newTitle = payload.newTitle
         const categoryId = payload.id
-        console.log(newTitle, categoryId)
         const sendUpdate = {
             title: newTitle
         }

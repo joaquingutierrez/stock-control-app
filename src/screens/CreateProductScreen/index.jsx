@@ -65,7 +65,6 @@ const CreateProductScreen = () => {
             image: image
         }
         const dataId = persistence === "local" ? await insertProduct(product) : await addProductCloud(product)
-        console.log(dataId)
         product.id = dataId
         dispatch(addProduct(product))
         setTitle("")
