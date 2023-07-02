@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { Ionicons } from '@expo/vector-icons'; 
 
 import { CreateNavigation, InventoryNavigation, CartNavigation } from '../index';
 import { getAllProductsCloud } from '../../store/cloud/productsStoreCloud';
@@ -14,6 +15,7 @@ import { getPersistence } from '../../store/fileStore';
 import { changePersistence } from '../../store/reducers/persistenceSlice';
 import { selectCart } from '../../store/sqlite/cartSqlite';
 import { selectCategories } from '../../store/sqlite/categorySqlite';
+import { colors } from '../../constants/theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,12 +49,41 @@ const MyTabs = () => {
         <Tab.Navigator
             initialRouteName="Inventory"
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                tabBarLabelStyle: {
+                    fontSize: 14,
+                },
+                tabBarActiveTintColor: "black",
+                tabBarInactiveTintColor: colors.tertiary,
+                tabBarStyle: {
+                    backgroundColor: colors.primary
+                },
             }}
         >
-            <Tab.Screen name="Create" component={CreateNavigation} />
-            <Tab.Screen name="Inventory" component={InventoryNavigation} />
-            <Tab.Screen name="Cart" component={CartNavigation} />
+            <Tab.Screen name="Create" component={CreateNavigation}
+                options={{
+                    tabBarLabel: "Crear",
+                    tabBarIcon: ({focused, color, size}) => {
+                        return <Ionicons name={focused ? "create" : "create-outline"} size={size} color="black" />
+                    }
+                }}
+            />
+            <Tab.Screen name="Inventory" component={InventoryNavigation}
+                options={{
+                    tabBarLabel: "Inventario",
+                    tabBarIcon: ({focused, color, size}) => {
+                        return <Ionicons name={focused ? "list-circle" : "list-circle-outline"} size={size} color="black" />
+                    }
+                }}
+            />
+            <Tab.Screen name="Cart" component={CartNavigation}
+                options={{
+                    tabBarLabel: "Carrito",
+                    tabBarIcon: ({focused, color, size}) => {
+                        return <Ionicons name={focused ? "cart" : "cart-outline"} size={size} color="black" />
+                    }
+                }}
+            />
         </Tab.Navigator>
     );
 }
