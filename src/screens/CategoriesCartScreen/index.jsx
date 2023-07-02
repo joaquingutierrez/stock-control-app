@@ -25,7 +25,7 @@ const CategoriesCartScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ItemTouchable title="Todos los Productos" textWhite={false} onSelected={() => onSelected({ title: "all", id: "-1" })} />
+            <ItemTouchable title="Todos los Productos" textWhite={false} onSelected={() => onSelected({ title: "Todos los productos", id: "-1" })} />
             <FlatList style={styles.containerList}
                 data={categories}
                 renderItem={({ item }) => <ItemTouchable title={`${item.title} (${quantityOfProductsByCategory(item.id)})`} textWhite={false} onSelected={() => onSelected(item)} />}
