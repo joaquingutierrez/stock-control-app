@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 
 import { CreateNavigation, InventoryNavigation, CartNavigation } from '../index';
 import { getAllProductsCloud } from '../../store/cloud/productsStoreCloud';
@@ -31,15 +31,25 @@ const MyTabs = () => {
             if (persistenceData) {
                 persistenceData = JSON.parse(persistenceData).persistence
                 dispatch(changePersistence(persistenceData))
+
+                const products = persistenceData === "local" ? await selectProducts() : await getAllProductsCloud()
+                dispatch(getProducts(products))
+
+                const categories = persistence === "local" ? await selectCategories() : await getAllCategoriesCloud()
+                dispatch(getCategories(categories))
+
+                const cart = persistence === "local" ? await selectCart() : await getCartCloud()
+                dispatch(getCart(cart))
+            } else {
+                const products = await selectProducts()
+                dispatch(getProducts(products))
+
+                const categories = await selectCategories()
+                dispatch(getCategories(categories))
+
+                const cart = await selectCart()
+                dispatch(getCart(cart))
             }
-            const products = persistenceData === "local" ? await selectProducts() : await getAllProductsCloud()
-            dispatch(getProducts(products))
-
-            const categories = persistence === "local" ? await selectCategories() : await getAllCategoriesCloud()
-            dispatch(getCategories(categories))
-
-            const cart = persistence === "local" ? await selectCart() : await getCartCloud()
-            dispatch(getCart(cart))
         }
         fetchData()
     }, [persistence])
@@ -63,7 +73,7 @@ const MyTabs = () => {
             <Tab.Screen name="Create" component={CreateNavigation}
                 options={{
                     tabBarLabel: "Crear",
-                    tabBarIcon: ({focused, color, size}) => {
+                    tabBarIcon: ({ focused, color, size }) => {
                         return <Ionicons name={focused ? "create" : "create-outline"} size={size} color="black" />
                     }
                 }}
@@ -71,7 +81,7 @@ const MyTabs = () => {
             <Tab.Screen name="Inventory" component={InventoryNavigation}
                 options={{
                     tabBarLabel: "Inventario",
-                    tabBarIcon: ({focused, color, size}) => {
+                    tabBarIcon: ({ focused, color, size }) => {
                         return <Ionicons name={focused ? "list-circle" : "list-circle-outline"} size={size} color="black" />
                     }
                 }}
@@ -79,7 +89,7 @@ const MyTabs = () => {
             <Tab.Screen name="Cart" component={CartNavigation}
                 options={{
                     tabBarLabel: "Carrito",
-                    tabBarIcon: ({focused, color, size}) => {
+                    tabBarIcon: ({ focused, color, size }) => {
                         return <Ionicons name={focused ? "cart" : "cart-outline"} size={size} color="black" />
                     }
                 }}
