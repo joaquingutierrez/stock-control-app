@@ -59,11 +59,11 @@ const ProductDetailScreen = ({ route }) => {
                         }}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <Text style={styles.modalText}>Cantidad a agregar:</Text>
+                                <CustomText myCustomText="Cantidad a agregar:" textType="title" />
                                 <InputNumber number={number} handleNumberSubstract={handleNumberSubstract} handleNumberAdd={handleNumberAdd} />
-                                <View>
-                                    <Button color={colors.ok} title="Aceptar" onPress={dispatchAddToCart} />
+                                <View style={styles.buttonsContainer}>
                                     <Button color={colors.danger} title="Cancelar" onPress={() => setModalVisible(false)} />
+                                    <Button color={colors.ok} title="Aceptar" onPress={dispatchAddToCart} />
                                 </View>
                             </View>
                         </View>

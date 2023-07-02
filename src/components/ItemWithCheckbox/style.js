@@ -21,6 +21,6 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.tertiary,
     },
     reached: {
-        backgroundColor: "green",
+        backgroundColor: colors.ok,
     }
 })

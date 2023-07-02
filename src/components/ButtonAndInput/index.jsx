@@ -2,6 +2,7 @@ import { Button, View } from "react-native";
 
 import { styles } from "./style"
 import InputNumber from "../InputNumber"
+import { colors } from "../../constants/theme";
 
 const ButtonAndInput = ({ title, number, handleNumberSubstract, handleNumberAdd, handleOnpress }) => {
 
@@ -14,6 +15,7 @@ const ButtonAndInput = ({ title, number, handleNumberSubstract, handleNumberAdd,
             />
             <Button
                 title={title}
+                color={colors.ok}
                 onPress={handleOnpress}
             />
         </View>

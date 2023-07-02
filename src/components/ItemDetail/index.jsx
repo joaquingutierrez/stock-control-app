@@ -53,11 +53,11 @@ const ItemDetail = ({ item, handleAddToCart }) => {
                 {item.image ? <Image style={styles.image} source={{ uri: item.image }} /> : <CustomText myCustomText="Sin imagen" />}
             </View>
             <CustomText myCustomText={item.title} textType="title" />
-            <View>
+            <View style={styles.horizontal}>
                 <CustomText myCustomText="Descripción: " />
                 <CustomText myCustomText={item.description || "Sin Descripción"} />
             </View>
-            <View>
+            <View style={styles.horizontal}>
                 <CustomText myCustomText="Categoría: " />
                 <CustomText myCustomText={item.category ? categories.find(category => category.id === item.category).title : "Sin categoría"} />
             </View>

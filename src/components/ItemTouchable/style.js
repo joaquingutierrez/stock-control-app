@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
     },
     danger: {
-        backgroundColor: "red",
+        backgroundColor: colors.danger,
     },
     textContainer: {
         marginLeft: 25,
