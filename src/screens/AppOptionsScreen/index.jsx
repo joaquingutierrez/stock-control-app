@@ -7,6 +7,7 @@ import CustomText from "../../components/CustomText"
 import { readUserId, createUserId } from "../../store/userId"
 import { changePersistence } from "../../store/reducers/persistenceSlice"
 import { getPersistence, savePersistence } from "../../store/fileStore"
+import { LabelAndInput } from "../../components"
 
 
 
@@ -69,8 +70,11 @@ const AppOptionsScreen = () => {
         <View style={styles.container}>
             <CustomText myCustomText="AppOptions" />
             <View>
-                <CustomText myCustomText="ID Autogenerado: " />
+                <CustomText myCustomText="ID de Usuario: " />
                 <CustomText myCustomText={userId} />
+            </View>
+            <View>
+                <LabelAndInput />
             </View>
             <View>
                 <CustomText myCustomText="Modo de almacenamiento: " />
