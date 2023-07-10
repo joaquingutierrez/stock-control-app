@@ -1,7 +1,7 @@
 import * as FileSystem from "expo-file-system"
 
-export const createUserId = async () => {
-    const userId = Date.now().toString()
+export const createUserId = async (newUserId) => {
+    const userId = newUserId || Date.now().toString()
     const path = FileSystem.documentDirectory + "UserId.json"
     try {
         const fileContent = JSON.stringify({ userId: userId })
@@ -37,4 +37,9 @@ export const deleteUserId = async () => {
     catch (err) {
         console.log(err)
     }
+}
+
+export const updateUserId = async (newUserId) => {
+    await deleteUserId()
+    await createUserId(newUserId)
 }
